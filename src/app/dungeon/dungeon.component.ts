@@ -19,9 +19,9 @@ export class DungeonComponent implements OnInit {
   getUnlockedActions(): Action[] {
     var unlockedActions: Action[] = [];
 
-    for (var action in this.dungeonData.getActionList()) {
-      if (this.dungeonData.getActionList()[action].unlocked) {
-        unlockedActions.push(this.dungeonData.getActionList()[action]);
+    for (var action of this.dungeonData.getActionList()) {
+      if (action.unlocked) {
+        unlockedActions.push(action);
       }
     }
 
