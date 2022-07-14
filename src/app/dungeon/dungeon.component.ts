@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Action, Dungeon } from './dungeon-data/dungeon-data';
 import { DungeonDataService } from './dungeon-data/dungeon-data.service';
+import { PlayerDataService } from '../player/player-data/player-data.service';
 
 @Component({
   selector: 'app-dungeon',
@@ -8,7 +9,9 @@ import { DungeonDataService } from './dungeon-data/dungeon-data.service';
   styleUrls: ['./dungeon.component.css']
 })
 export class DungeonComponent implements OnInit {
-  constructor(private dungeonData: DungeonDataService) { }
+  constructor(
+    private dungeonData: DungeonDataService,
+    private playerData: PlayerDataService) { }
 
   ngOnInit(): void {}
 
@@ -17,15 +20,7 @@ export class DungeonComponent implements OnInit {
   }
 
   getUnlockedActions(): Action[] {
-    var unlockedActions: Action[] = [];
-
-    for (var action of this.dungeonData.getActionList()) {
-      if (action.unlocked) {
-        unlockedActions.push(action);
-      }
-    }
-
-    return unlockedActions;
+    return this.dungeonData.getActionList(true);
   }
 
   setAction(action: string) {
@@ -35,7 +30,7 @@ export class DungeonComponent implements OnInit {
   performAction(action: string) {
     switch (action) {
       case "Explore": {
-        this.dungeonData.explore(1);
+        this.dungeonData.explore(this.playerData.getPlayerData());
       }
     }
   }
