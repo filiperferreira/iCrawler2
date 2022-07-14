@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Dungeon, DUNGEON } from './dungeon-data';
+import { Player } from 'src/app/player/player-data/player-data';
+import { Action, Dungeon, DUNGEON } from './dungeon-data';
 
 @Injectable({
   providedIn: 'root'
@@ -22,13 +23,24 @@ export class DungeonDataService {
     return this.dungeon.action;
   }
 
-  getActionList() {
+  getActionList(unlocked = false) {
+    if (unlocked) {
+      var unlockedActions: Action[] = [];
+
+      for (var action of this.dungeon.action_list) {
+        if (action.unlocked) {
+          unlockedActions.push(action);
+        }
+      }
+
+      return unlockedActions;
+    }
     return this.dungeon.action_list;
   }
 
-  explore(value: number) {
+  explore(player: Player) {
     if (!this.isFullyExplored()) {
-      this.dungeon.exploration.current += value;
+      this.dungeon.exploration.current += 1;
     }
   }
 
