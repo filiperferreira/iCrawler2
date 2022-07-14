@@ -14,4 +14,8 @@ export class PlayerDataService {
   getPlayerData() {
     return this.player;
   }
+
+  gainExp(stat: number, amount: number) {
+    this.player.stats[stat].exp += amount;
+  }
 }
