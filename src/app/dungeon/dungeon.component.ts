@@ -31,6 +31,7 @@ export class DungeonComponent implements OnInit {
     switch (action) {
       case "Explore": {
         this.dungeonData.explore(this.playerData.getPlayerData());
+        this.playerData.gainExp(3, 1);
       }
     }
   }
