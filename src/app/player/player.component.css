@@ -1,0 +1,104 @@
+#player {
+    width: 50%;
+    min-width: 450px;
+    padding: 10px;
+    border: 5px double black;
+}
+
+#player-name {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+}
+
+#resource-display {
+    margin-bottom: 5px;
+}
+
+#resource-text {
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    min-width: 20px;
+    width: 5%;
+}
+
+#health-bar {
+    float: right;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    min-width: 400px;
+    width: 93%;
+    height: 20px;
+    border: 4px solid brown;
+    border-radius: 10px;
+    background-color: brown;
+}
+#health-bar::-webkit-progress-value {
+    border-radius: 5px;
+    background-color: red;
+}
+#health-bar::-webkit-progress-bar {
+    border-radius: 6px;
+    background-color: black;
+}
+
+#mana-bar {
+    float: right;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    min-width: 350px;
+    width: 93%;
+    height: 20px;
+    border: 4px solid skyblue;
+    border-radius: 10px;
+    background-color: skyblue;
+}
+#mana-bar::-webkit-progress-value {
+    border-radius: 5px;
+    background-color: lightblue;
+}
+#mana-bar::-webkit-progress-bar {
+    border-radius: 6px;
+    background-color: black;
+}
+
+#stat-div {
+    width: 100%;
+}
+
+#stat-text {
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    min-width: 20px;
+    width: 7%
+}
+
+#stat-value {
+    vertical-align: middle;
+    display: inline-block;
+    text-align: center;
+    min-width: 40px;
+    width: 13%;
+}
+
+#exp-bar {
+    -webkit-appearance: none;
+    min-width: 100px;
+    width: 30%;
+    height: 12px;
+    border: 3px solid gray;
+    border-radius: 5px;
+    background-color: gray;
+    vertical-align: middle;
+}
+#exp-bar::-webkit-progress-value {
+    border-radius: 3px;
+    background-color: white;
+}
+#exp-bar::-webkit-progress-bar {
+    border-radius: 3px;
+    background-color: black;
+}

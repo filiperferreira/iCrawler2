@@ -1,0 +1,13 @@
+#exploration-bar {
+    vertical-align: middle;
+    -webkit-appearance: none;
+    width: 350px;
+    height: 20px;
+    border: 4px solid darkgreen;
+}
+#exploration-bar::-webkit-progress-value {
+    background-color: lightgreen;
+}
+#exploration-bar::-webkit-progress-bar {
+    background-color: black;
+}

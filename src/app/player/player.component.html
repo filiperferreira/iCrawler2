@@ -1,0 +1,25 @@
+<div id="player">
+    <div id="player-name">{{getPlayer().name}}</div>
+    <hr>
+    <div id="resource-display">
+        <span id="resource-text">HP</span>
+        <progress id="health-bar"
+            value="{{getPlayer().health.current}}" 
+            max="{{getPlayer().health.max}}"></progress><br>
+    </div>
+    <div id="resource-display">
+        <span id="resource-text">MP</span>
+        <progress id="mana-bar"
+            value="{{getPlayer().mana.current}}"
+            max="{{getPlayer().mana.max}}"></progress>
+    </div>
+    <div id="stat-div">
+        <span *ngFor="let stat of getPlayer().stats">
+            <span id="stat-text">{{stat.id | statPipe}}</span>
+            <span id="stat-value">{{stat.level}}</span>
+            <progress id="exp-bar"
+                value="{{stat.exp}}"
+                max="{{stat.exp_to_level}}"></progress>
+        </span>
+    </div>
+</div>

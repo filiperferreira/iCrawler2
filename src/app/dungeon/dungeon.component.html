@@ -1,0 +1,10 @@
+<h1>{{getDungeon().name}}</h1>
+Area explored:
+<progress id="exploration-bar"
+    value="{{getDungeon().exploration.current}}"
+    max="{{getDungeon().exploration.max}}"></progress><br><br>
+Current Action: {{getDungeon().action}}<br><br>
+Actions:<br>
+<button *ngFor="let action of getUnlockedActions()"
+    (click)="setAction(action.name)"
+    [disabled]="getDungeon().action == action.name">{{action.name}}</button>
