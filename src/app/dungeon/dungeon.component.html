@@ -1,16 +1,25 @@
-<h1>{{getDungeon().name}}</h1>
-Area explored:
-<progress id="exploration-bar"
-    value="{{getDungeon().exploration.current}}"
-    max="{{getDungeon().exploration.max}}"></progress><br><br>
-Current Action:
-<span *ngIf="getDungeon().action == -1">
-    None
-<br><br></span>
-<span *ngIf="getDungeon().action != -1">
-    {{getDungeon().action_list[getDungeon().action].name}}
-<br><br></span>
-Actions:<br>
-<button *ngFor="let action of getUnlockedActions()"
-    (click)="setAction(action.id)"
-    [disabled]="getDungeon().action == action.id">{{action.name}}</button>
+<div id="dungeon">
+    <div id="dungeon-title">
+        <span id="title">Current Area</span><br>
+        <span id="dungeon-name">{{getDungeon().name}}</span>
+    </div>
+    <hr>
+    <div id="exploration-display">
+        <span id="exploration-text">Area explored: </span>
+        <progress id="exploration-bar"
+            value="{{getDungeon().exploration.current}}"
+            max="{{getDungeon().exploration.max}}"></progress>
+    </div>
+    <hr>
+    Current Action:
+    <span *ngIf="getDungeon().action == undefined">
+        None
+    <br><br></span>
+    <span *ngIf="getDungeon().action != undefined">
+        {{getDungeon().action?.name}}
+    <br><br></span>
+    Actions:<br>
+    <button *ngFor="let action of getUnlockedActions()"
+        (click)="setAction(action)"
+        [disabled]="getDungeon().action == action">{{action.name}}</button>
+</div>

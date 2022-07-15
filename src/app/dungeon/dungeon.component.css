@@ -1,7 +1,36 @@
+#dungeon {
+    width: 50%;
+    min-width: 450px;
+    padding: 10px;
+    border: 5px double black;
+}
+
+#dungeon-title {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+}
+
+#title {
+    font-size: medium;
+}
+
+#dungeon-name {
+    font-size: x-large;
+}
+
+#exploration-text {
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    width: 16%;
+}
+
 #exploration-bar {
     vertical-align: middle;
     -webkit-appearance: none;
-    width: 350px;
+    width: 84%;
     height: 20px;
     border: 4px solid darkgreen;
 }
