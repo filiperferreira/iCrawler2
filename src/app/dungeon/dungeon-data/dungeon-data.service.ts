@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Player } from 'src/app/player/player-data/player-data';
 import { Action, Dungeon, DUNGEON } from './dungeon-data';
+import { PlayerDataService } from 'src/app/player/player-data/player-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import { Action, Dungeon, DUNGEON } from './dungeon-data';
 export class DungeonDataService {
   dungeon: Dungeon
 
-  constructor() { 
+  constructor(private playerData: PlayerDataService) { 
     this.dungeon = DUNGEON;
   }
 
@@ -16,11 +16,13 @@ export class DungeonDataService {
     return this.dungeon;
   }
 
-  setActiveAction(action: string) {
+  setActiveAction(action: number) {
     this.dungeon.action = action;
   }
-  getActiveAction() {
-    return this.dungeon.action;
+  getActiveAction(): void {
+    return this.dungeon.action_list[this.dungeon.action].action(
+      this, this.playerData
+    );
   }
 
   getActionList(unlocked = false) {
@@ -28,7 +30,7 @@ export class DungeonDataService {
       var unlockedActions: Action[] = [];
 
       for (var action of this.dungeon.action_list) {
-        if (action.unlocked) {
+        if (action.unlockedAt <= this.dungeon.exploration.current) {
           unlockedActions.push(action);
         }
       }
@@ -38,9 +40,10 @@ export class DungeonDataService {
     return this.dungeon.action_list;
   }
 
-  explore(player: Player) {
-    if (!this.isFullyExplored()) {
-      this.dungeon.exploration.current += 1;
+  explore(amount: number) {
+    this.dungeon.exploration.current += amount;
+    if (this.dungeon.exploration.current > this.dungeon.exploration.max) {
+      this.dungeon.exploration.current = this.dungeon.exploration.max;
     }
   }
 

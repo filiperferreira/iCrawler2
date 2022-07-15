@@ -3,8 +3,14 @@ Area explored:
 <progress id="exploration-bar"
     value="{{getDungeon().exploration.current}}"
     max="{{getDungeon().exploration.max}}"></progress><br><br>
-Current Action: {{getDungeon().action}}<br><br>
+Current Action:
+<span *ngIf="getDungeon().action == -1">
+    None
+<br><br></span>
+<span *ngIf="getDungeon().action != -1">
+    {{getDungeon().action_list[getDungeon().action].name}}
+<br><br></span>
 Actions:<br>
 <button *ngFor="let action of getUnlockedActions()"
-    (click)="setAction(action.name)"
-    [disabled]="getDungeon().action == action.name">{{action.name}}</button>
+    (click)="setAction(action.id)"
+    [disabled]="getDungeon().action == action.id">{{action.name}}</button>
