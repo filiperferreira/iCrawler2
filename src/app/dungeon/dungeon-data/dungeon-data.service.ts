@@ -16,13 +16,15 @@ export class DungeonDataService {
     return this.dungeon;
   }
 
-  setActiveAction(action: number) {
+  setActiveAction(action: Action) {
     this.dungeon.action = action;
   }
   getActiveAction(): void {
-    return this.dungeon.action_list[this.dungeon.action].action(
-      this, this.playerData
-    );
+    if (this.dungeon.action != undefined) {
+      return this.dungeon.action.action(
+        this, this.playerData
+      );
+    }
   }
 
   getActionList(unlocked = false) {
