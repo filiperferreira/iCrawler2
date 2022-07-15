@@ -40,3 +40,8 @@
 #exploration-bar::-webkit-progress-bar {
     background-color: black;
 }
+
+#action-button {
+    margin: 5px;
+    padding: 5px;
+}

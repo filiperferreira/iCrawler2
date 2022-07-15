@@ -21,7 +21,7 @@ export class DungeonComponent implements OnInit {
     return this.dungeonData.getActionList(true);
   }
 
-  setAction(action: Action) {
+  setAction(action?: Action) {
     this.dungeonData.setActiveAction(action);
   }
 

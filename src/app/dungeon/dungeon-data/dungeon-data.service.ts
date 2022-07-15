@@ -16,7 +16,7 @@ export class DungeonDataService {
     return this.dungeon;
   }
 
-  setActiveAction(action: Action) {
+  setActiveAction(action?: Action) {
     this.dungeon.action = action;
   }
   getActiveAction(): void {

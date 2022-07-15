@@ -13,13 +13,16 @@
     <hr>
     Current Action:
     <span *ngIf="getDungeon().action == undefined">
-        None
-    <br><br></span>
+        Rest
+    <br></span>
     <span *ngIf="getDungeon().action != undefined">
         {{getDungeon().action?.name}}
-    <br><br></span>
-    Actions:<br>
-    <button *ngFor="let action of getUnlockedActions()"
+    <br></span>
+    <button id="action-button"
+        (click)="setAction(undefined)"
+        [disabled]="getDungeon().action == undefined">Rest</button>
+    <button id="action-button"
+        *ngFor="let action of getUnlockedActions()"
         (click)="setAction(action)"
         [disabled]="getDungeon().action == action">{{action.name}}</button>
 </div>
