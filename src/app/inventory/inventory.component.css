@@ -1,0 +1,16 @@
+#inventory {
+    width: 100% - 10px;
+    padding: 10px;
+    border: 5px double black;
+}
+
+#inventory-title {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+}
+
+#title {
+    font-size: medium;
+}

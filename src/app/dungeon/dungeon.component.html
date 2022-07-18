@@ -11,17 +11,10 @@
             max="{{getDungeon().exploration.max}}"></progress>
     </div>
     <hr>
-    Current Action:
-    <span *ngIf="getDungeon().action == undefined">
-        Rest
-    <br></span>
-    <span *ngIf="getDungeon().action != undefined">
-        {{getDungeon().action?.name}}
-    <br></span>
-    <button id="action-button"
+    <button class="action-button"
         (click)="setAction(undefined)"
         [disabled]="getDungeon().action == undefined">Rest</button>
-    <button id="action-button"
+    <button class="action-button"
         *ngFor="let action of getUnlockedActions()"
         (click)="setAction(action)"
         [disabled]="getDungeon().action == action">{{action.name}}</button>

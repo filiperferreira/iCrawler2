@@ -4,12 +4,19 @@
     border: 5px double black;
 }
 
-#player-name {
+#player-title {
     width: 100%;
     text-align: center;
-    font-size: x-large;
     display: inline-block;
     font-weight: bold;
+}
+
+#title {
+    font-size: medium;
+}
+
+#player-name {
+    font-size: x-large;
 }
 
 #resource-display {
