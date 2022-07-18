@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
 import { StatPipePipe } from './stat-pipe.pipe';
 import { DungeonComponent } from './dungeon/dungeon.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayerComponent,
     StatPipePipe,
-    DungeonComponent
+    DungeonComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule

@@ -1,6 +1,5 @@
 #player {
-    width: 50%;
-    min-width: 450px;
+    width: 100% - 10px;
     padding: 10px;
     border: 5px double black;
 }
@@ -29,7 +28,6 @@
     float: right;
     vertical-align: middle;
     -webkit-appearance: none;
-    min-width: 400px;
     width: 93%;
     height: 20px;
     border: 4px solid brown;
@@ -49,7 +47,6 @@
     float: right;
     vertical-align: middle;
     -webkit-appearance: none;
-    min-width: 350px;
     width: 93%;
     height: 20px;
     border: 4px solid skyblue;
@@ -73,7 +70,6 @@
     text-align: center;
     vertical-align: middle;
     display: inline-block;
-    min-width: 20px;
     width: 7%
 }
 
@@ -81,13 +77,11 @@
     vertical-align: middle;
     display: inline-block;
     text-align: center;
-    min-width: 40px;
     width: 13%;
 }
 
 #exp-bar {
     -webkit-appearance: none;
-    min-width: 100px;
     width: 30%;
     height: 12px;
     border: 3px solid gray;

@@ -1,0 +1,17 @@
+#main {
+    width: 100%;
+}
+
+.component {
+    margin: 10px;
+}
+
+#left-column {
+    float: left;
+    width: 50%;
+}
+
+#right-column {
+    float: left;
+    width: 50%;
+}
