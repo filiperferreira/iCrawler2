@@ -6,6 +6,7 @@ import { PlayerComponent } from './player/player.component';
 import { StatPipePipe } from './stat-pipe.pipe';
 import { DungeonComponent } from './dungeon/dungeon.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { InventoryComponent } from './inventory/inventory.component';
     InventoryComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
