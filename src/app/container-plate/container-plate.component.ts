@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
@@ -7,6 +7,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   styleUrls: ['./container-plate.component.css']
 })
 export class ContainerPlateComponent implements OnInit {
+  @Input() type?: string;
+
   currentBreakpoint: string = '';
 
   readonly breakpoint$ = this.breakpointObserver.observe([
@@ -39,7 +41,6 @@ export class ContainerPlateComponent implements OnInit {
     else if (this.breakpointObserver.isMatched(Breakpoints.XSmall)) {
       this.currentBreakpoint = Breakpoints.XSmall;
     }
-    console.log(this.currentBreakpoint);
   }
 
   getBreakpoint(): String {
