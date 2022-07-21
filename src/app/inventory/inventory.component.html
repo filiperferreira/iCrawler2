@@ -2,17 +2,22 @@
     <div id="inventory-title">
         <span id="title">Inventory</span><br>
     </div>
+    <hr>
     <table id="table">
         <tr>
-            <th>Amount</th>
-            <th>Item</th>
-            <th>Actions</th>
+            <th class="amount-column">Amount</th>
+            <th class="item-column">Item</th>
+            <th class="actions-column">Actions</th>
         </tr>
         <tr *ngFor="let item of listItems()">
-            <td>{{item.amount}}</td>
-            <td>{{item.name}}<br>
-            {{item.description}}</td>
-            <td><button>Use</button></td>
+            <td class="amount-column">{{item.amount}}</td>
+            <td class="item-column">
+                <span class="item-name">{{item.name}}</span><br>
+                <span class="item-description">{{item.description}}</span>
+            </td>
+            <td class="action-column">
+                <button (click)="useItem(item)">Use</button>
+            </td>
         </tr>
     </table>
 </div>

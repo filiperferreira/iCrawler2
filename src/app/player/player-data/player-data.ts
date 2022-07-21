@@ -15,7 +15,7 @@ export interface Stat {
 
 export const PLAYER: Player = {
     name: "Crawler",
-    health: {current: 100, min: 0, max: 100},
+    health: {current: 50, min: 0, max: 100},
     mana: {current: 50, min: 0, max: 50},
     stats: [{id: "Strength", level: 5, exp: 0, exp_to_level: 100},
             {id: "Dexterity", level: 5, exp: 0, exp_to_level: 100},

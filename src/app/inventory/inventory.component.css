@@ -18,3 +18,26 @@
 #table {
     width: 100%;
 }
+
+.amount-column {
+    width: 15%;
+    text-align: center;
+}
+
+.item-column {
+    width: 60%;
+}
+
+.item-name {
+    font-weight: 500;
+}
+
+.item-description {
+    font-weight: 100;
+    font-style: italic;
+    font-size: small;
+}
+
+.actions-column {
+    width: 30%;
+}

@@ -26,4 +26,7 @@ export class InventoryDataService {
   gainItem(item: number, amount: number): void {
     this.inventory.items[item].amount += amount;
   }
+  removeItem(item: Item, amount: number): void {
+    item.amount -= amount;
+  }
 }

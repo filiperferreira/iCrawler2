@@ -13,9 +13,9 @@ export interface Inventory {
 
 export const INVENTORY: Inventory = {
     items: [{
-        name: "Herb",
+        name: "Green Herb",
         description: "Restores 25 HP",
-        amount: 0,
+        amount: 1,
         action: function(player) {
             player.restoreHP(25);
         }
