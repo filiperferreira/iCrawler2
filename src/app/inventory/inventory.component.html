@@ -2,4 +2,17 @@
     <div id="inventory-title">
         <span id="title">Inventory</span><br>
     </div>
+    <table id="table">
+        <tr>
+            <th>Amount</th>
+            <th>Item</th>
+            <th>Actions</th>
+        </tr>
+        <tr *ngFor="let item of listItems()">
+            <td>{{item.amount}}</td>
+            <td>{{item.name}}<br>
+            {{item.description}}</td>
+            <td><button>Use</button></td>
+        </tr>
+    </table>
 </div>

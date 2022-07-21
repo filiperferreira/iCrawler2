@@ -38,12 +38,16 @@ export class DungeonDataService {
     }
   }
 
+  deactivateAction(action: number): void {
+    this.dungeon.action_list[action].active = false;
+  }
+
   getActionList(unlocked = false): Action[] {
     if (unlocked) {
       var unlockedActions: Action[] = [];
 
       for (var action of this.dungeon.action_list) {
-        if (action.unlockedAt <= this.getExploration().current) {
+        if (action.unlockedAt <= this.getExploration().current && action.active) {
           unlockedActions.push(action);
         }
       }
@@ -51,6 +55,21 @@ export class DungeonDataService {
       return unlockedActions;
     }
     return this.dungeon.action_list;
+  }
+
+  progressAction(action: number, amount: number): boolean {
+    this.dungeon.action_list[action].progress.current += amount;
+    if (this.dungeon.action_list[action].progress.current >= this.dungeon.action_list[action].progress.max) {
+      if (this.dungeon.action_list[action].repeatable) {
+        this.dungeon.action_list[action].progress.current = 0;
+      }
+      else {
+        this.dungeon.action_list[action].progress.current = this.dungeon.action_list[action].progress.max;
+        this.deactivateAction(action);
+      }
+      return true;
+    }
+    return false;
   }
 
   explore(amount: number): void {

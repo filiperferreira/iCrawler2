@@ -35,7 +35,7 @@ export class DungeonComponent implements OnInit {
 
   performAction(action: void) {}
 
-  seconds: number = 1;
+  seconds: number = 1/60;
   action = setInterval(() => {
     if (this.getDungeon().action != undefined) {
       this.performAction(this.dungeonData.getActiveAction());

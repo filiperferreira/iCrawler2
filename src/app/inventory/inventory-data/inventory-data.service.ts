@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Inventory, INVENTORY } from './inventory-data';
+import { Inventory, INVENTORY, Item } from './inventory-data';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,18 @@ export class InventoryDataService {
 
   constructor() { 
     this.inventory = INVENTORY;
+  }
+
+  listItems() {
+    var items: Item[] = [];
+
+    for (var item of this.inventory.items) {
+      if (item.amount > 0) {
+        items.push(item);
+      }
+    }
+
+    return items;
   }
 
   gainItem(item: number, amount: number): void {

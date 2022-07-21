@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { InventoryDataService } from './inventory-data/inventory-data.service';
+import { Item } from './inventory-data/inventory-data';
 
 @Component({
   selector: 'app-inventory',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(private inventoryData: InventoryDataService) { }
 
   ngOnInit(): void {
   }
 
+  listItems(): Item[] {
+    return this.inventoryData.listItems();
+  }
 }
