@@ -19,6 +19,11 @@ export class PlayerDataService {
 
   gainExp(stat: number, amount: number) {
     this.player.stats[stat].exp += amount;
+    while (this.player.stats[stat].exp >= this.player.stats[stat].expToLevel) {
+      this.player.stats[stat].exp -= this.player.stats[stat].expToLevel;
+      this.player.stats[stat].level += 1;
+      this.player.stats[stat].expToLevel = Math.pow(this.player.stats[stat].expToLevel, 1.1);
+    }
   }
 
   restoreHP(value: number) {

@@ -15,7 +15,7 @@ export const INVENTORY: Inventory = {
     items: [{
         name: "Green Herb",
         description: "Restores 25 HP",
-        amount: 1,
+        amount: 0,
         action: function(player) {
             player.restoreHP(25);
         }
