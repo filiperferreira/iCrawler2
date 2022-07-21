@@ -1,11 +1,13 @@
 import { PlayerDataService } from "src/app/player/player-data/player-data.service";
 import { DungeonDataService } from "./dungeon-data.service";
 import { InventoryDataService } from "src/app/inventory/inventory-data/inventory-data.service";
+import { Resource, Stat } from "src/app/player/player-data/player-data";
 
 export interface Dungeon {
     name: string,
     action?: Action,
-    action_list: Action[]
+    actionList: Action[]
+    enemyList: Enemy[]
 }
 
 export interface Progress {
@@ -21,8 +23,7 @@ export interface Action {
     repeatable: boolean,
     progress: Progress,
     usedSkills: Difficulty[],
-    action: (
-        dungeon: DungeonDataService,
+    action: (dungeon: DungeonDataService,
         player: PlayerDataService,
         inventory: InventoryDataService) => void
 }
@@ -33,10 +34,17 @@ export interface Difficulty {
     weight: number
 }
 
+export interface Enemy {
+    name: string,
+    health: Resource,
+    mana: Resource,
+    stats: Stat[]
+}
+
 export const DUNGEON: Dungeon = {
     name: "Forest",
     action: undefined,
-    action_list: [{
+    actionList: [{
         name: "Explore", 
         unlockedAt: 0,
         active: true,
@@ -68,5 +76,18 @@ export const DUNGEON: Dungeon = {
                 player.gainExp(pair.skill, 1/60 * pair.weight);
             }
         }
+    }],
+    enemyList: [{
+        name: "Boar",
+        health: {current: 25, min: 0, max: 25},
+        mana: {current: 0, min: 0, max: 0},
+        stats: [
+            {id: "Strength", level: 5, exp: 0, expToLevel: 100},
+            {id: "Dexterity", level: 5, exp: 0, expToLevel: 100},
+            {id: "Constitution", level: 5, exp: 0, expToLevel: 100},
+            {id: "Speed", level: 5, exp: 0, expToLevel: 100},
+            {id: "Magic", level: 5, exp: 0, expToLevel: 100},
+            {id: "Luck", level: 5, exp: 0, expToLevel: 100}
+        ]
     }]
 }

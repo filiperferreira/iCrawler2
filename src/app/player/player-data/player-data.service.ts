@@ -18,7 +18,7 @@ export class PlayerDataService {
   }
 
   gainExp(stat: number, amount: number) {
-    this.player.stats[stat].exp += amount;
+    this.player.stats[stat].exp += amount * this.player.stats[stat].level;
     while (this.player.stats[stat].exp >= this.player.stats[stat].expToLevel) {
       this.player.stats[stat].exp -= this.player.stats[stat].expToLevel;
       this.player.stats[stat].level += 1;

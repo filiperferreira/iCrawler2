@@ -24,7 +24,7 @@ export class DungeonDataService {
   }
 
   getActionProgress(action: number): Progress {
-    return this.dungeon.action_list[action].progress;
+    return this.dungeon.actionList[action].progress;
   }
 
   setActiveAction(action?: Action): void {
@@ -39,14 +39,14 @@ export class DungeonDataService {
   }
 
   deactivateAction(action: number): void {
-    this.dungeon.action_list[action].active = false;
+    this.dungeon.actionList[action].active = false;
   }
 
   getActionList(unlocked = false): Action[] {
     if (unlocked) {
       var unlockedActions: Action[] = [];
 
-      for (var action of this.dungeon.action_list) {
+      for (var action of this.dungeon.actionList) {
         if (action.unlockedAt <= this.getExploration().current && action.active) {
           unlockedActions.push(action);
         }
@@ -54,29 +54,22 @@ export class DungeonDataService {
 
       return unlockedActions;
     }
-    return this.dungeon.action_list;
+    return this.dungeon.actionList;
   }
 
   progressAction(action: number, amount: number): boolean {
-    this.dungeon.action_list[action].progress.current += amount;
-    if (this.dungeon.action_list[action].progress.current >= this.dungeon.action_list[action].progress.max) {
-      if (this.dungeon.action_list[action].repeatable) {
-        this.dungeon.action_list[action].progress.current = 0;
+    this.dungeon.actionList[action].progress.current += amount;
+    if (this.dungeon.actionList[action].progress.current >= this.dungeon.actionList[action].progress.max) {
+      if (this.dungeon.actionList[action].repeatable) {
+        this.dungeon.actionList[action].progress.current = 0;
       }
       else {
-        this.dungeon.action_list[action].progress.current = this.dungeon.action_list[action].progress.max;
+        this.dungeon.actionList[action].progress.current = this.dungeon.actionList[action].progress.max;
         this.deactivateAction(action);
       }
       return true;
     }
     return false;
-  }
-
-  explore(amount: number): void {
-    this.getExploration().current += amount;
-    if (this.getExploration().current > this.getExploration().max) {
-      this.getExploration().current = this.getExploration().max;
-    }
   }
 
   isFullyExplored(): boolean {
