@@ -8,7 +8,6 @@ import { DungeonComponent } from './dungeon/dungeon.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { ContainerPlateComponent } from './container-plate/container-plate.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +15,7 @@ import { ContainerPlateComponent } from './container-plate/container-plate.compo
     PlayerComponent,
     StatPipePipe,
     DungeonComponent,
-    InventoryComponent,
-    ContainerPlateComponent
+    InventoryComponent
   ],
   imports: [
     BrowserModule,

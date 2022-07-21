@@ -1,3 +1,17 @@
-#main {
+.small-column {
+    float: left;
+    box-sizing: border-box;
     width: 100%;
+}
+
+.medium-column {
+    float: left;
+    box-sizing: border-box;
+    width: 50%;
+}
+
+.large-column {
+    float: left;
+    box-sizing: border-box;
+    width: 25%;
 }

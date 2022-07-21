@@ -1,5 +1,9 @@
 <div id="main">
-    <app-container-plate type="player"></app-container-plate>
-    <app-container-plate type="dungeon"></app-container-plate>
-    <app-container-plate type="inventory"></app-container-plate>
+    <div [ngClass]="getBreakpoint()">
+        <app-player></app-player>
+        <app-dungeon></app-dungeon>
+    </div>
+    <div [ngClass]="getBreakpoint()">
+        <app-inventory></app-inventory>
+    </div>
 </div>
