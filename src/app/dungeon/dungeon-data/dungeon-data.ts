@@ -28,8 +28,9 @@ export interface Action {
 }
 
 export interface Difficulty {
-    skill: number;
-    difficulty: number
+    skill: number,
+    difficulty: number,
+    weight: number
 }
 
 export const DUNGEON: Dungeon = {
@@ -41,11 +42,14 @@ export const DUNGEON: Dungeon = {
         active: true,
         repeatable: false,
         progress: {label: "Explored", current: 0, max: 100},
-        usedSkills: [{skill: 3, difficulty: 5}],
+        usedSkills: [{skill: 3, difficulty: 5, weight: 1}],
         action: function(dungeon, player, inventory) {
             if (!dungeon.isFullyExplored()) {
-                dungeon.progressAction(0,1/60);
-                player.gainExp(3,1/60);
+                var actionProgress = player.calculateProgress(this.usedSkills);
+                dungeon.progressAction(0, actionProgress/60);
+                for (var pair of this.usedSkills) {
+                    player.gainExp(pair.skill, 1/60 * pair.weight);
+                }
             }
         }
     },{
@@ -54,10 +58,14 @@ export const DUNGEON: Dungeon = {
         active: true,
         repeatable: true,
         progress: {label: "Gathering", current: 0, max: 5},
-        usedSkills: [{skill: 0, difficulty: 10}, {skill: 2, difficulty: 5}],
+        usedSkills: [{skill: 0, difficulty: 10, weight: 2}, {skill: 2, difficulty: 5, weight: 1}],
         action: function(dungeon, player, inventory) {
-            if (dungeon.progressAction(1,1/60)) {
+            var actionProgress = player.calculateProgress(this.usedSkills);
+            if (dungeon.progressAction(1, actionProgress/60)) {
                 inventory.gainItem(0, 1);
+            }
+            for (var pair of this.usedSkills) {
+                player.gainExp(pair.skill, 1/60 * pair.weight);
             }
         }
     }]
