@@ -20,24 +20,24 @@
     font-size: x-large;
 }
 
-#exploration-text {
+.action-progress-label {
     text-align: center;
     display: inline-block;
     vertical-align: middle;
     width: 16%;
 }
 
-#exploration-bar {
+.action-progress-bar {
     vertical-align: middle;
     -webkit-appearance: none;
     width: 84%;
     height: 20px;
     border: 4px solid darkgreen;
 }
-#exploration-bar::-webkit-progress-value {
+.action-progress-bar::-webkit-progress-value {
     background-color: lightgreen;
 }
-#exploration-bar::-webkit-progress-bar {
+.action-progress-bar::-webkit-progress-bar {
     background-color: black;
 }
 

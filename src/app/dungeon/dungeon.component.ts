@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Action, Dungeon } from './dungeon-data/dungeon-data';
+import { Action, Dungeon, Progress } from './dungeon-data/dungeon-data';
 import { DungeonDataService } from './dungeon-data/dungeon-data.service';
 
 @Component({
@@ -15,6 +15,14 @@ export class DungeonComponent implements OnInit {
 
   getDungeon(): Dungeon {
     return this.dungeonData.getDungeonData();
+  }
+
+  getExploration(): Progress {
+    return this.dungeonData.getExploration();
+  }
+
+  getActionProgress(action: number): Progress {
+    return this.dungeonData.getActionProgress(action);
   }
 
   getUnlockedActions(): Action[] {
