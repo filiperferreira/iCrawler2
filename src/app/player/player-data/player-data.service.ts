@@ -36,8 +36,11 @@ export class PlayerDataService {
   calculateProgress(usedSkills: Difficulty[]): number {
     var progress: number = 1;
 
-    for (var pair of usedSkills) {
-      progress *= Math.pow(this.player.stats[pair.skill].level / pair.difficulty, pair.weight);
+    for (var usedSkill of usedSkills) {
+      progress *= Math.pow(
+        this.player.stats[usedSkill.skill].level / usedSkill.difficulty,
+        usedSkill.weight
+      );
     }
 
     return progress;
