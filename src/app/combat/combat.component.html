@@ -1,6 +1,7 @@
-<div id="combat">
+<div id="combat" *ngIf="isInCombat()">
     <div id="combat-title">
         <span id="title">Combat Screen</span>
     </div>
     <hr>
+    <button (click)="endCombat()">End Combat With {{getEnemyName()}}</button>
 </div>

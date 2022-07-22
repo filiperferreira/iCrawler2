@@ -9,6 +9,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { CombatComponent } from './combat/combat.component';
+import { LogWindowComponent } from './log-window/log-window.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CombatComponent } from './combat/combat.component';
     StatPipePipe,
     DungeonComponent,
     InventoryComponent,
-    CombatComponent
+    CombatComponent,
+    LogWindowComponent
   ],
   imports: [
     BrowserModule,

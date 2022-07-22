@@ -8,4 +8,15 @@ export class CombatDataService {
   enemy?: Enemy
 
   constructor() { }
+
+  setEnemy(enemy?: Enemy) {
+    this.enemy = enemy;
+  }
+
+  getEnemyName(): string {
+    if (this.enemy != undefined) {
+      return this.enemy.name;
+    }
+    return "";
+  }
 }

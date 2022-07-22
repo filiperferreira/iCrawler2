@@ -1,6 +1,6 @@
 import { Injectable} from '@angular/core';
-import { tick } from '@angular/core/testing';
 import { Difficulty } from 'src/app/dungeon/dungeon-data/dungeon-data';
+import { LogWindowDataService } from 'src/app/log-window/log-window-data/log-window-data.service';
 import { Player, PLAYER } from './player-data';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { Player, PLAYER } from './player-data';
 export class PlayerDataService {
   player: Player
 
-  constructor() { 
+  constructor(private messageLog: LogWindowDataService) { 
     this.player = PLAYER;
   }
 
@@ -23,6 +23,10 @@ export class PlayerDataService {
       this.player.stats[stat].exp -= this.player.stats[stat].expToLevel;
       this.player.stats[stat].level += 1;
       this.player.stats[stat].expToLevel = Math.pow(this.player.stats[stat].expToLevel, 1.1);
+      this.messageLog.addMessageToLog(
+        this.player.stats[stat].id +
+        " leveled up to " +
+        this.player.stats[stat].level + ".");
     }
   }
 

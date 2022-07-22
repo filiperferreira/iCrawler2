@@ -1,0 +1,16 @@
+#log {
+    margin: 5px;
+    padding: 5px;
+    border: 5px double black;
+}
+
+#log-title {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+}
+
+#title {
+    font-size: x-large;
+}

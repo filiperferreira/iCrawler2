@@ -2,6 +2,8 @@ import { PlayerDataService } from "src/app/player/player-data/player-data.servic
 import { DungeonDataService } from "./dungeon-data.service";
 import { InventoryDataService } from "src/app/inventory/inventory-data/inventory-data.service";
 import { CombatDataService } from "src/app/combat/combat-data/combat-data.service";
+import { LogWindowDataService } from "src/app/log-window/log-window-data/log-window-data.service";
+import { Resource } from "src/app/player/player-data/player-data";
 
 export interface Dungeon {
     name: string,
@@ -27,7 +29,8 @@ export interface Action {
     action: (dungeon: DungeonDataService,
         player: PlayerDataService,
         inventory: InventoryDataService,
-        combat: CombatDataService) => void
+        combat: CombatDataService,
+        messageLog: LogWindowDataService) => void
 }
 
 export interface Difficulty {
@@ -38,7 +41,7 @@ export interface Difficulty {
 
 export interface Enemy {
     name: string,
-    health: number,
+    health: Resource,
     stats: number[],
     skills: Skill[]
 }
@@ -58,7 +61,7 @@ export const DUNGEON: Dungeon = {
         repeatable: false,
         progress: {label: "Explored", current: 0, max: 100},
         usedSkills: [{skill: 3, difficulty: 5, weight: 1}],
-        action: function(dungeon, player, inventory, combat) {
+        action: function(dungeon, player, inventory, combat, messageLog) {
             if (!dungeon.isFullyExplored() && !dungeon.isInCombat()) {
                 var actionProgress = player.calculateProgress(this.usedSkills);
                 dungeon.progressAction(0, actionProgress/60);
@@ -67,6 +70,8 @@ export const DUNGEON: Dungeon = {
                 }
                 if (dungeon.encounterRoll(dungeon.getEncounterChance())) {
                     dungeon.setInCombat(true);
+                    dungeon.setActiveAction(undefined);
+                    messageLog.addMessageToLog("You were attacked by a " + combat.getEnemyName() + ".");
                 }
             }
         }
@@ -80,7 +85,7 @@ export const DUNGEON: Dungeon = {
             {skill: 0, difficulty: 10, weight: 2},
             {skill: 2, difficulty: 5, weight: 1}
         ],
-        action: function(dungeon, player, inventory, combat) {
+        action: function(dungeon, player, inventory, combat, messageLog) {
             var actionProgress = player.calculateProgress(this.usedSkills);
             if (dungeon.progressAction(1, actionProgress/60)) {
                 inventory.gainItem(0, 1);
@@ -93,7 +98,7 @@ export const DUNGEON: Dungeon = {
     encounterChance: 1,
     enemyList: [{
         name: "Boar",
-        health: 25,
+        health: {current: 25, min: 0, max: 25},
         stats: [10, 3, 4],
         skills: [{
             name: "Charge",
@@ -103,7 +108,7 @@ export const DUNGEON: Dungeon = {
         }]
     }, {
         name: "Wolf",
-        health: 15,
+        health: {current: 15, min: 0, max: 15},
         stats: [6, 2, 7],
         skills: [{
             name: "Bite",

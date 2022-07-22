@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LogWindowDataService } from 'src/app/log-window/log-window-data/log-window-data.service';
 import { Inventory, INVENTORY, Item } from './inventory-data';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { Inventory, INVENTORY, Item } from './inventory-data';
 export class InventoryDataService {
   inventory: Inventory;
 
-  constructor() { 
+  constructor(private messageLog: LogWindowDataService) { 
     this.inventory = INVENTORY;
   }
 
@@ -25,6 +26,11 @@ export class InventoryDataService {
 
   gainItem(item: number, amount: number): void {
     this.inventory.items[item].amount += amount;
+    this.messageLog.addMessageToLog(
+      "You obtained a " +
+      this.inventory.items[item].name +
+      "."
+    );
   }
   removeItem(item: Item, amount: number): void {
     item.amount -= amount;

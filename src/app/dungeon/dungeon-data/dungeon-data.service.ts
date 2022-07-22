@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Action, Dungeon, DUNGEON, Progress } from './dungeon-data';
+import { Action, Dungeon, DUNGEON, Progress} from './dungeon-data';
 import { PlayerDataService } from 'src/app/player/player-data/player-data.service';
 import { InventoryDataService } from 'src/app/inventory/inventory-data/inventory-data.service';
 import { CombatDataService } from 'src/app/combat/combat-data/combat-data.service';
+import { LogWindowDataService } from 'src/app/log-window/log-window-data/log-window-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class DungeonDataService {
   constructor(
     private playerData: PlayerDataService,
     private inventoryData: InventoryDataService,
-    private combatData: CombatDataService) { 
+    private combatData: CombatDataService,
+    private messageLog: LogWindowDataService) { 
       this.dungeon = DUNGEON;
     }
 
@@ -31,17 +33,33 @@ export class DungeonDataService {
   }
 
   setActiveAction(action?: Action): void {
+    if (action != undefined) {
+      this.messageLog.addMessageToLog("You started to " + action.name + ".");
+    }
     this.dungeon.action = action;
   }
   getActiveAction(): void {
     if (this.dungeon.action != undefined) {
       return this.dungeon.action.action(
-        this, this.playerData, this.inventoryData, this.combatData
+        this, this.playerData, this.inventoryData, this.combatData, this.messageLog
       );
     }
   }
 
   setInCombat(value: boolean): void {
+    if (value == true) {
+      var enemyList = this.dungeon.enemyList;
+      var enemyRoll = Math.floor(Math.random() * enemyList.length);
+      this.combatData.setEnemy(this.dungeon.enemyList[enemyRoll]);
+    }
+    else {
+      this.messageLog.addMessageToLog(
+        "Combat with " +
+        this.combatData.getEnemyName() +
+        " ended."
+      )
+      this.combatData.setEnemy(undefined);
+    }
     this.inCombat = value;
   }
   isInCombat(): boolean {

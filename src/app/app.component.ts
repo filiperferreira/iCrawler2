@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { DungeonDataService } from './dungeon/dungeon-data/dungeon-data.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,7 @@ export class AppComponent {
     Breakpoints.XSmall
   ])
 
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  constructor(private breakpointObserver: BreakpointObserver, private dungeonData: DungeonDataService) { }
 
   ngOnInit(): void {
     this.breakpoint$.subscribe(() => this.breakpointChanged());
