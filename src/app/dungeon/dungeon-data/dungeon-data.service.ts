@@ -2,16 +2,19 @@ import { Injectable } from '@angular/core';
 import { Action, Dungeon, DUNGEON, Progress } from './dungeon-data';
 import { PlayerDataService } from 'src/app/player/player-data/player-data.service';
 import { InventoryDataService } from 'src/app/inventory/inventory-data/inventory-data.service';
+import { CombatDataService } from 'src/app/combat/combat-data/combat-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DungeonDataService {
   dungeon: Dungeon
+  inCombat: boolean = false;
 
   constructor(
     private playerData: PlayerDataService,
-    private inventoryData: InventoryDataService) { 
+    private inventoryData: InventoryDataService,
+    private combatData: CombatDataService) { 
       this.dungeon = DUNGEON;
     }
 
@@ -33,9 +36,20 @@ export class DungeonDataService {
   getActiveAction(): void {
     if (this.dungeon.action != undefined) {
       return this.dungeon.action.action(
-        this, this.playerData, this.inventoryData
+        this, this.playerData, this.inventoryData, this.combatData
       );
     }
+  }
+
+  setInCombat(value: boolean): void {
+    this.inCombat = value;
+  }
+  isInCombat(): boolean {
+    return this.inCombat;
+  }
+
+  getEncounterChance(): number {
+    return this.dungeon.encounterChance;
   }
 
   deactivateAction(action: number): void {
@@ -74,5 +88,13 @@ export class DungeonDataService {
 
   isFullyExplored(): boolean {
     return this.getExploration().current >= this.getExploration().max;
+  }
+
+  encounterRoll(chance: number): boolean {
+    var roll = Math.floor(Math.random() * 100) + 1;
+    if (roll <= chance) {
+      return true;
+    }
+    return false;
   }
 }

@@ -29,6 +29,10 @@ export class DungeonComponent implements OnInit {
     return this.dungeonData.getActionList(true);
   }
 
+  isInCombat(): boolean {
+    return this.dungeonData.isInCombat();
+  }
+
   setAction(action?: Action) {
     this.dungeonData.setActiveAction(action);
   }

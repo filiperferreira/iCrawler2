@@ -13,9 +13,10 @@
     <hr>
     <button class="action-button"
         (click)="setAction(undefined)"
-        [disabled]="getDungeon().action == undefined">Rest</button>
+        [disabled]="getDungeon().action == undefined || isInCombat()">Rest</button>
     <button class="action-button"
         *ngFor="let action of getUnlockedActions()"
         (click)="setAction(action)"
-        [disabled]="getDungeon().action == action">{{action.name}}</button>    
+        [disabled]="getDungeon().action == action || isInCombat()">{{action.name}}</button>    
 </div>
+<app-combat *ngIf="isInCombat()"></app-combat>
