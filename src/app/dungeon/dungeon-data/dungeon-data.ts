@@ -77,7 +77,7 @@ export const DUNGEON: Dungeon = {
         }
     },{
         name: "Gather Herbs",
-        unlockedAt: 10,
+        unlockedAt: 5,
         active: true,
         repeatable: true,
         progress: {label: "Gathering", current: 0, max: 5},

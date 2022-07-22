@@ -2,6 +2,7 @@
     margin: 5px;
     padding: 5px;
     border: 5px double black;
+    overflow: hidden;
 }
 
 #combat-title {
@@ -13,4 +14,58 @@
 
 #title {
     font-size: x-large;
+}
+
+#commands {
+    width: 30%;
+    float: left;
+}
+
+.command-button {
+    width: 100%;
+    margin: 3px;
+}
+
+#enemy-stats {
+    width: 70%;
+    float: right;
+}
+
+.subtitle {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#resource-display {
+    margin-bottom: 5px;
+}
+
+#resource-text {
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    min-width: 20px;
+    width: 10%;
+}
+
+#health-bar {
+    float: right;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    width: 90%;
+    height: 20px;
+    border: 4px solid brown;
+    border-radius: 10px;
+    background-color: brown;
+}
+#health-bar::-webkit-progress-value {
+    border-radius: 5px;
+    background-color: red;
+}
+#health-bar::-webkit-progress-bar {
+    border-radius: 6px;
+    background-color: black;
 }

@@ -3,5 +3,21 @@
         <span id="title">Combat Screen</span>
     </div>
     <hr>
-    <button (click)="endCombat()">End Combat With {{getEnemyName()}}</button>
+    <div id="commands">
+        <div class="subtitle">Commands</div>
+        <div id="command-list">
+            <button class="command-button" (click)="endCombat()">Command 1</button><br>
+            <button class="command-button" (click)="endCombat()">Command 2</button><br>
+            <button class="command-button" (click)="endCombat()">End Combat With {{getEnemyName()}}</button>
+        </div>
+    </div>
+    <div id="enemy-stats">
+        <div class="subtitle">{{getEnemyName()}}</div>
+        <div id="resource-display">
+            <span id="resource-text">HP</span>
+            <progress id="health-bar"
+                value="{{getEnemyHealth().current}}" 
+                max="{{getEnemyHealth().max}}"></progress><br>
+        </div>
+    </div>
 </div>

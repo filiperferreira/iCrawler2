@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DungeonDataService } from '../dungeon/dungeon-data/dungeon-data.service';
+import { Resource } from '../player/player-data/player-data';
 import { CombatDataService } from './combat-data/combat-data.service';
 
 @Component({
@@ -14,6 +15,9 @@ export class CombatComponent implements OnInit {
 
   getEnemyName(): string {
     return this.combatData.getEnemyName();
+  }
+  getEnemyHealth(): Resource {
+    return this.combatData.getEnemyHealth();
   }
 
   isInCombat(): boolean {
