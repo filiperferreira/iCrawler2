@@ -10,19 +10,21 @@
             value="{{getPlayer().health.current}}" 
             max="{{getPlayer().health.max}}"></progress><br>
     </div>
-    <div id="resource-display">
-        <span id="resource-text">MP</span>
-        <progress id="mana-bar"
-            value="{{getPlayer().mana.current}}"
-            max="{{getPlayer().mana.max}}"></progress>
+    <div class="skill-div">
+        <span class="skill-title">Life Skills</span>
+        <span *ngFor="let skill of getPlayer().life_skills">
+            <span class="skill-text">{{skill.id}}</span>
+            <span class="skill-value">{{skill.level}}</span>
+            <progress class="exp-bar"
+                value="{{skill.exp}}"
+                max="{{skill.expToLevel}}"></progress>
+        </span>
     </div>
-    <div id="stat-div">
-        <span *ngFor="let stat of getPlayer().stats">
-            <span id="stat-text">{{stat.id | statPipe}}</span>
-            <span id="stat-value">{{stat.level}}</span>
-            <progress id="exp-bar"
-                value="{{stat.exp}}"
-                max="{{stat.expToLevel}}"></progress>
+    <div class="stat-div">
+        <span class="stat-title">Combat Stats</span>
+        <span *ngFor="let stat of getPlayer().combat_stats">
+            <span class="stat-text">{{stat.id}}</span>
+            <span class="stat-value">{{stat.level}}</span>
         </span>
     </div>
 </div>

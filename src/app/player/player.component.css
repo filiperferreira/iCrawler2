@@ -1,4 +1,5 @@
 #player {
+    overflow: hidden;
     margin: 5px;
     padding: 5px;
     border: 5px double black;
@@ -69,38 +70,76 @@
     background-color: black;
 }
 
-#stat-div {
+.skill-div {
+    box-sizing: border-box;
+    padding: 5px;
+    float: left;
+    text-align: center;
+    width: 70%;
+    border: 1px solid black;
+}
+
+.skill-title {
+    display: inline-block;
+    font-weight: bold;
     width: 100%;
+    margin-bottom: 5px;
 }
 
-#stat-text {
-    text-align: center;
+.skill-text {
     vertical-align: middle;
     display: inline-block;
-    width: 7%
-}
-
-#stat-value {
-    vertical-align: middle;
-    display: inline-block;
-    text-align: center;
-    width: 13%;
-}
-
-#exp-bar {
-    -webkit-appearance: none;
     width: 30%;
+}
+
+.skill-value {
+    vertical-align: middle;
+    display: inline-block;
+    width: 20%;
+}
+
+.exp-bar {
+    width: 50%;
+    -webkit-appearance: none;
     height: 12px;
     border: 3px solid gray;
     border-radius: 5px;
     background-color: gray;
     vertical-align: middle;
 }
-#exp-bar::-webkit-progress-value {
+.exp-bar::-webkit-progress-value {
     border-radius: 3px;
     background-color: white;
 }
-#exp-bar::-webkit-progress-bar {
+.exp-bar::-webkit-progress-bar {
     border-radius: 3px;
     background-color: black;
+}
+
+.stat-div {
+    box-sizing: border-box;
+    padding: 5px;
+    float: right;
+    text-align: center;
+    width: 29%;
+    border: 1px solid black;
+}
+
+.stat-title {
+    display: inline-block;
+    font-weight: bold;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.stat-text {
+    vertical-align: middle;
+    display: inline-block;
+    width: 60%;
+}
+
+.stat-value {
+    vertical-align: middle;
+    display: inline-block;
+    width: 40%;
 }

@@ -3,7 +3,7 @@ import { DungeonDataService } from "./dungeon-data.service";
 import { InventoryDataService } from "src/app/inventory/inventory-data/inventory-data.service";
 import { CombatDataService } from "src/app/combat/combat-data/combat-data.service";
 import { LogWindowDataService } from "src/app/log-window/log-window-data/log-window-data.service";
-import { Resource } from "src/app/player/player-data/player-data";
+import { Resource, Stat } from "src/app/player/player-data/player-data";
 
 export interface Dungeon {
     name: string,
@@ -42,13 +42,13 @@ export interface Difficulty {
 export interface Enemy {
     name: string,
     health: Resource,
-    stats: number[],
+    stats: Stat[],
     skills: Skill[]
 }
 
 export interface Skill {
     name: string,
-    action: () => void
+    action: (playerStats: Stat[], enemyStats: Stat[]) => number
 }
 
 export const DUNGEON: Dungeon = {
@@ -59,14 +59,14 @@ export const DUNGEON: Dungeon = {
         unlockedAt: 0,
         active: true,
         repeatable: false,
-        progress: {label: "Explored", current: 0, max: 100},
-        usedSkills: [{skill: 3, difficulty: 5, weight: 1}],
+        progress: {label: "Explore", current: 0, max: 100},
+        usedSkills: [{skill: 0, difficulty: 5, weight: 1}],
         action: function(dungeon, player, inventory, combat, messageLog) {
             if (!dungeon.isFullyExplored() && !dungeon.isInCombat()) {
                 var actionProgress = player.calculateProgress(this.usedSkills);
                 dungeon.progressAction(0, actionProgress/60);
                 for (var usedSkill of this.usedSkills) {
-                    player.gainExp(usedSkill.skill, 1/60 * usedSkill.difficulty);
+                    player.gainExp(usedSkill.skill, usedSkill.difficulty);
                 }
                 if (dungeon.encounterRoll(dungeon.getEncounterChance())) {
                     dungeon.setInCombat(true);
@@ -80,18 +80,15 @@ export const DUNGEON: Dungeon = {
         unlockedAt: 5,
         active: true,
         repeatable: true,
-        progress: {label: "Gathering", current: 0, max: 5},
-        usedSkills: [
-            {skill: 0, difficulty: 10, weight: 2},
-            {skill: 2, difficulty: 5, weight: 1}
-        ],
+        progress: {label: "Gather Herbs", current: 0, max: 5},
+        usedSkills: [{skill: 1, difficulty: 5, weight: 1}],
         action: function(dungeon, player, inventory, combat, messageLog) {
             var actionProgress = player.calculateProgress(this.usedSkills);
             if (dungeon.progressAction(1, actionProgress/60)) {
                 inventory.gainItem(0, 1);
             }
             for (var usedSkill of this.usedSkills) {
-                player.gainExp(usedSkill.skill, 1/60 * usedSkill.difficulty);
+                player.gainExp(usedSkill.skill, usedSkill.difficulty);
             }
         }
     }],
@@ -99,21 +96,39 @@ export const DUNGEON: Dungeon = {
     enemyList: [{
         name: "Boar",
         health: {current: 25, min: 0, max: 25},
-        stats: [10, 3, 4],
+        stats: [
+            {id: "Attack", level: 10},
+            {id: "Defense", level: 3},
+            {id: "Speed", level: 4}
+        ],
         skills: [{
             name: "Charge",
-            action: function() {
-                console.log("Used " + this.name);
+            action: function(playerStats, enemyStats) {
+                var damageDifferential = Math.random() * 0.4 + 0.9;
+                var enemyDamage = enemyStats[0].level * damageDifferential;
+                var playerDefense = playerStats[1].level * (Math.random() * 0.4 + 0.9);
+                enemyDamage -= playerDefense;
+                enemyDamage = Math.round(enemyDamage);
+                return enemyDamage;
             }
         }]
     }, {
         name: "Wolf",
         health: {current: 15, min: 0, max: 15},
-        stats: [6, 2, 7],
+        stats: [
+            {id: "Attack", level: 6},
+            {id: "Defense", level: 2},
+            {id: "Speed", level: 7}
+        ],
         skills: [{
             name: "Bite",
-            action: function() {
-                console.log("Used " + this.name);
+            action: function(playerStats, enemyStats) {
+                var damageDifferential = Math.random() * 0.4 + 0.9;
+                var enemyDamage = enemyStats[0].level * damageDifferential;
+                var playerDefense = playerStats[1].level * (Math.random() * 0.4 + 0.9);
+                enemyDamage -= playerDefense;
+                enemyDamage = Math.round(enemyDamage);
+                return enemyDamage;
             }
         }]
     }]
