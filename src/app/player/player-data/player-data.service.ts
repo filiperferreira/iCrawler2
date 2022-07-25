@@ -17,24 +17,45 @@ export class PlayerDataService {
     return this.player;
   }
   getCombatStats(): Stat[] {
-    return this.player.combat_stats;
+    return this.player.combatStats;
   }
 
-  gainExp(skill: number, difficulty: number): void {
-    var exp_ratio = 1/60;
-    
-    this.player.life_skills[skill].exp += exp_ratio * difficulty;
-    while (this.player.life_skills[skill].exp >= this.player.life_skills[skill].expToLevel) {
-      this.player.life_skills[skill].exp -= this.player.life_skills[skill].expToLevel;
-      this.player.life_skills[skill].level += 1;
-      this.player.life_skills[skill].expToLevel = Math.pow(this.player.life_skills[skill].expToLevel, 1.1);
+  hasUnallocatedStats(): boolean {
+    if (this.player.unallocatedStats > 0) {
+      return true;
+    }
+    return false;
+  }
+  levelStat(stat: Stat): void {
+    stat.level += 1;
+    this.player.unallocatedStats -= 1;
+  }
+
+  gainExp(skill: number, difficulty: number, expRatio: number): void {   
+    this.player.lifeSkills[skill].exp += expRatio * difficulty;
+    while (this.player.lifeSkills[skill].exp >= this.player.lifeSkills[skill].expToLevel) {
+      this.player.lifeSkills[skill].exp -= this.player.lifeSkills[skill].expToLevel;
+      this.player.lifeSkills[skill].level += 1;
+      this.player.lifeSkills[skill].expToLevel = Math.pow(this.player.lifeSkills[skill].expToLevel, 1.1);
       this.messageLog.addMessageToLog(
-        this.player.life_skills[skill].id +
+        this.player.lifeSkills[skill].id +
         " leveled up to " +
-        this.player.life_skills[skill].level + ".");
+        this.player.lifeSkills[skill].level + ".");
+      if (skill == 2) {
+        this.player.unallocatedStats += 3;
+      }
     }
   }
 
+  takeDamage(value: number): boolean {
+    this.player.health.current -= value;
+    if (this.player.health.current <= 0) {
+      this.player.health.current = 0;
+      this.messageLog.addMessageToLog("You died.");
+      return true;
+    }
+    return false;
+  }
   restoreHP(value: number): void {
     this.player.health.current += value;
     if (this.player.health.current > this.player.health.max) {
@@ -47,7 +68,7 @@ export class PlayerDataService {
 
     for (var usedSkill of usedSkills) {
       progress *= Math.pow(
-        this.player.life_skills[usedSkill.skill].level / usedSkill.difficulty,
+        this.player.lifeSkills[usedSkill.skill].level / usedSkill.difficulty,
         usedSkill.weight
       );
     }

@@ -29,13 +29,14 @@ export class CombatComponent implements OnInit {
   }
 
   attack(): void {
-    this.combatData.combat(this.playerData);
+    this.combatData.combat(this.playerData, this.dungeonData);
   }
 
   isInCombat(): boolean {
     return this.dungeonData.isInCombat();
   }
   endCombat(): void {
+    this.combatData.resetHp();
     this.dungeonData.setInCombat(false);
   }
 }

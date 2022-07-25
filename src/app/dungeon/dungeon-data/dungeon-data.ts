@@ -48,7 +48,7 @@ export interface Enemy {
 
 export interface Skill {
     name: string,
-    action: (playerStats: Stat[], enemyStats: Stat[]) => number
+    action: (playerStats: Stat[], combatData: CombatDataService) => number
 }
 
 export const DUNGEON: Dungeon = {
@@ -66,7 +66,7 @@ export const DUNGEON: Dungeon = {
                 var actionProgress = player.calculateProgress(this.usedSkills);
                 dungeon.progressAction(0, actionProgress/60);
                 for (var usedSkill of this.usedSkills) {
-                    player.gainExp(usedSkill.skill, usedSkill.difficulty);
+                    player.gainExp(usedSkill.skill, usedSkill.difficulty, 1/60);
                 }
                 if (dungeon.encounterRoll(dungeon.getEncounterChance())) {
                     dungeon.setInCombat(true);
@@ -88,7 +88,7 @@ export const DUNGEON: Dungeon = {
                 inventory.gainItem(0, 1);
             }
             for (var usedSkill of this.usedSkills) {
-                player.gainExp(usedSkill.skill, usedSkill.difficulty);
+                player.gainExp(usedSkill.skill, usedSkill.difficulty, 1/60);
             }
         }
     }],
@@ -103,13 +103,8 @@ export const DUNGEON: Dungeon = {
         ],
         skills: [{
             name: "Charge",
-            action: function(playerStats, enemyStats) {
-                var damageDifferential = Math.random() * 0.4 + 0.9;
-                var enemyDamage = enemyStats[0].level * damageDifferential;
-                var playerDefense = playerStats[1].level * (Math.random() * 0.4 + 0.9);
-                enemyDamage -= playerDefense;
-                enemyDamage = Math.round(enemyDamage);
-                return enemyDamage;
+            action: function(playerStats, combatData) {
+                return combatData.calculateDamage(combatData.enemy.stats, playerStats);
             }
         }]
     }, {
@@ -122,13 +117,8 @@ export const DUNGEON: Dungeon = {
         ],
         skills: [{
             name: "Bite",
-            action: function(playerStats, enemyStats) {
-                var damageDifferential = Math.random() * 0.4 + 0.9;
-                var enemyDamage = enemyStats[0].level * damageDifferential;
-                var playerDefense = playerStats[1].level * (Math.random() * 0.4 + 0.9);
-                enemyDamage -= playerDefense;
-                enemyDamage = Math.round(enemyDamage);
-                return enemyDamage;
+            action: function(playerStats, combatData) {
+                return combatData.calculateDamage(combatData.enemy.stats, playerStats);
             }
         }]
     }]

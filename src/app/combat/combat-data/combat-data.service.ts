@@ -1,6 +1,6 @@
-import { ResourceLoader } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Enemy } from 'src/app/dungeon/dungeon-data/dungeon-data';
+import { DungeonDataService } from 'src/app/dungeon/dungeon-data/dungeon-data.service';
 import { LogWindowDataService } from 'src/app/log-window/log-window-data/log-window-data.service';
 import { Resource, Stat } from 'src/app/player/player-data/player-data';
 import { PlayerDataService } from 'src/app/player/player-data/player-data.service';
@@ -27,7 +27,9 @@ export class CombatDataService {
     }]
   }
 
-  constructor(private messageLog: LogWindowDataService) { 
+  constructor(
+    private messageLog: LogWindowDataService
+  ) { 
     this.enemy = this.placeholderEnemy;
   }
 
@@ -54,25 +56,71 @@ export class CombatDataService {
     return this.enemy.health;
   }
 
-  combat(player: PlayerDataService): void {
+  resetHp(): void {
+    this.enemy.health.current = this.enemy.health.max;
+  }
+
+  enemyTakeDamage(damage: number): boolean {
+    this.enemy.health.current -= damage;
+    if (this.enemy.health.current <= 0) {
+      this.enemy.health.current = 0;
+      this.messageLog.addMessageToLog("You defeated the " + this.enemy.name + ".");
+      return true;
+    }
+    return false;
+  }
+
+  combat(player: PlayerDataService, dungeon: DungeonDataService): void {
     var playerStats = player.getCombatStats();
     if (playerStats[2].level >= this.enemy.stats[2].level) {
-      this.playerAttack(playerStats);
-      this.enemyAttack(playerStats);
+      if (!this.playerAttack(player)) {
+        if (this.enemyAttack(player)) {
+          this.resetHp();
+          dungeon.setInCombat(false);
+        }
+      }
+      else {
+        this.resetHp();
+        dungeon.setInCombat(false);
+      }
     }
     else {
-      this.enemyAttack(playerStats);
-      this.playerAttack(playerStats);
+      if (!this.enemyAttack(player)) {
+        if (this.playerAttack(player)) {
+          this.resetHp();
+          dungeon.setInCombat(false);
+        }
+      }
+      else {
+        this.resetHp();
+        dungeon.setInCombat(false);
+      }
     }
   }
 
-  enemyAttack(playerStats: Stat[]): void {
-    var hitDifferential = (this.enemy.stats[2].level - playerStats[2].level)/10;
+  calculateDamage(attacker: Stat[], defender: Stat[]): number {
+      var damageDifferential = Math.random() * 0.4 + 0.9;
+      var attackerDamage = attacker[0].level * damageDifferential;
+      var defenderDefense = defender[1].level * (Math.random() * 0.4 + 0.9);
+
+      attackerDamage -= defenderDefense;
+
+      return Math.round(attackerDamage);
+  }
+
+  checkHit(attacker: Stat[], defender: Stat[]): boolean {
+    var hitDifferential = (attacker[2].level - defender[2].level)/10;
     var hitChance = Math.random();
+
+    return (hitChance <= 0.8 + hitDifferential);
+  }
+
+  enemyAttack(player: PlayerDataService): boolean {
+    var playerStats = player.getCombatStats();
     var usedSkill = Math.floor(Math.random() * this.enemy.skills.length);
 
-    if (hitChance <= 0.8 + hitDifferential) {
-      var damage = this.enemy.skills[usedSkill].action(playerStats, this.enemy.stats);
+    if (this.checkHit(this.enemy.stats, playerStats)) {
+      var damage = this.enemy.skills[usedSkill].action(playerStats, this);
       if (damage <= 0) {
         this.messageLog.addMessageToLog(
           "You blocked the " + this.enemy.name + "'s " +
@@ -85,6 +133,8 @@ export class CombatDataService {
           this.enemy.skills[usedSkill].name + " did " +
           damage.toString() + " damage to you."
         );
+        player.gainExp(2, damage, 1);
+        return player.takeDamage(damage);
       }
     }
     else {
@@ -92,31 +142,30 @@ export class CombatDataService {
         "You dodged the " + this.enemy.name + "'s " + this.enemy.skills[usedSkill].name + "."
       );
     }
+    return false;
   }
 
-  playerAttack(playerStats: Stat[]): void {
-    var hitDifferential = (playerStats[2].level - this.enemy.stats[2].level)/10;
-    var hitChance = Math.random();
+  playerAttack(player: PlayerDataService): boolean {
+    var playerStats = player.getCombatStats();
 
-    if (hitChance <= 0.8 + hitDifferential) {
-      var damageDifferential = Math.random() * 0.4 + 0.9;
-      var playerDamage = playerStats[0].level * damageDifferential;
-      var enemyDefense = this.enemy.stats[1].level * (Math.random() * 0.4 + 0.9);
-      playerDamage -= enemyDefense;
-      playerDamage = Math.round(playerDamage);
-      if (playerDamage <= 0) {
+    if (this.checkHit(playerStats, this.enemy.stats)) {
+      var damage = this.calculateDamage(playerStats, this.enemy.stats);
+      if (damage <= 0) {
         this.messageLog.addMessageToLog(
           "The " + this.enemy.name + " blocked your attack."
         );
       }
       else {
         this.messageLog.addMessageToLog(
-          "You did " + playerDamage.toString() + " damage to the " + this.enemy.name + "."
+          "You did " + damage.toString() + " damage to the " + this.enemy.name + "."
         );
+        player.gainExp(2, damage, 1);
+        return this.enemyTakeDamage(damage);
       }
     }
     else {
       this.messageLog.addMessageToLog("The " + this.enemy.name + " dodged your attack.");
     }
+    return false;
   }
 }

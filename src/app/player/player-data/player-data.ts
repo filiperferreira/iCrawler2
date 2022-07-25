@@ -2,8 +2,9 @@ export interface Player {
     name: string,
     health: Resource,
     mana: Resource,
-    life_skills: Skill[],
-    combat_stats: Stat[]
+    lifeSkills: Skill[],
+    combatStats: Stat[],
+    unallocatedStats: number
 }
 
 export interface Resource {
@@ -22,14 +23,15 @@ export const PLAYER: Player = {
     name: "Crawler",
     health: {current: 100, min: 0, max: 100},
     mana: {current: 50, min: 0, max: 50},
-    life_skills: [
+    lifeSkills: [
         {id: "Exploration", level: 1, exp: 0, expToLevel: 100},
         {id: "Gathering", level: 1, exp: 0, expToLevel: 100},
         {id: "Combat", level: 1, exp: 0, expToLevel: 100}
     ],
-    combat_stats: [
+    combatStats: [
         {id: "Attack", level: 5},
         {id: "Defense", level: 5},
         {id: "Speed", level: 5}
-    ]
+    ],
+    unallocatedStats: 0
 };

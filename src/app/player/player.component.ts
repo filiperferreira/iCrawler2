@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Player } from './player-data/player-data';
+import { Player, Stat } from './player-data/player-data';
 import { PlayerDataService } from './player-data/player-data.service';
 
 @Component({
@@ -18,5 +18,12 @@ export class PlayerComponent implements OnInit {
 
   getPlayer(): Player {
     return this.playerData.getPlayerData();
+  }
+
+  hasUnallocatedStats(): boolean {
+    return this.playerData.hasUnallocatedStats();
+  }
+  levelStat(stat: Stat): void {
+    this.playerData.levelStat(stat);
   }
 }
