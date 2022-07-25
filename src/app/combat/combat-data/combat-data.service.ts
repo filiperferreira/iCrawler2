@@ -75,7 +75,8 @@ export class CombatDataService {
       var damage = this.enemy.skills[usedSkill].action(playerStats, this.enemy.stats);
       if (damage <= 0) {
         this.messageLog.addMessageToLog(
-          "You blocked the " + this.enemy.name + "'s attack."
+          "You blocked the " + this.enemy.name + "'s " +
+          this.enemy.skills[usedSkill].name + "."
         );
       }
       else {
