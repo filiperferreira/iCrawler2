@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Player, Stat } from './player-data/player-data';
+import { Player, Skill, Stat } from './player-data/player-data';
 import { PlayerDataService } from './player-data/player-data.service';
 
 @Component({
@@ -18,6 +18,12 @@ export class PlayerComponent implements OnInit {
 
   getPlayer(): Player {
     return this.playerData.getPlayerData();
+  }
+  isSkillActivated(skill: Skill): boolean {
+    if (skill.level > 1 || skill.exp > 0) {
+      return true;
+    }
+    return false;
   }
 
   hasUnallocatedStats(): boolean {

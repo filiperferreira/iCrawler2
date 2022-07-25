@@ -133,7 +133,7 @@ export class CombatDataService {
           this.enemy.skills[usedSkill].name + " did " +
           damage.toString() + " damage to you."
         );
-        player.gainExp(2, damage, 1);
+        player.gainExp(0, damage, 1);
         return player.takeDamage(damage);
       }
     }
@@ -159,7 +159,7 @@ export class CombatDataService {
         this.messageLog.addMessageToLog(
           "You did " + damage.toString() + " damage to the " + this.enemy.name + "."
         );
-        player.gainExp(2, damage, 1);
+        player.gainExp(0, damage, 1);
         return this.enemyTakeDamage(damage);
       }
     }

@@ -60,7 +60,7 @@ export const DUNGEON: Dungeon = {
         active: true,
         repeatable: false,
         progress: {label: "Explore", current: 0, max: 100},
-        usedSkills: [{skill: 0, difficulty: 5, weight: 1}],
+        usedSkills: [{skill: 1, difficulty: 5, weight: 1}],
         action: function(dungeon, player, inventory, combat, messageLog) {
             if (!dungeon.isFullyExplored() && !dungeon.isInCombat()) {
                 var actionProgress = player.calculateProgress(this.usedSkills);
@@ -81,7 +81,7 @@ export const DUNGEON: Dungeon = {
         active: true,
         repeatable: true,
         progress: {label: "Gather Herbs", current: 0, max: 5},
-        usedSkills: [{skill: 1, difficulty: 5, weight: 1}],
+        usedSkills: [{skill: 2, difficulty: 5, weight: 1}],
         action: function(dungeon, player, inventory, combat, messageLog) {
             var actionProgress = player.calculateProgress(this.usedSkills);
             if (dungeon.progressAction(1, actionProgress/60)) {

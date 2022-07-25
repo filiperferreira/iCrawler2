@@ -24,9 +24,9 @@ export const PLAYER: Player = {
     health: {current: 100, min: 0, max: 100},
     mana: {current: 50, min: 0, max: 50},
     lifeSkills: [
+        {id: "Combat", level: 1, exp: 0, expToLevel: 100},
         {id: "Exploration", level: 1, exp: 0, expToLevel: 100},
-        {id: "Gathering", level: 1, exp: 0, expToLevel: 100},
-        {id: "Combat", level: 1, exp: 0, expToLevel: 100}
+        {id: "Gathering", level: 1, exp: 0, expToLevel: 100}
     ],
     combatStats: [
         {id: "Attack", level: 5},

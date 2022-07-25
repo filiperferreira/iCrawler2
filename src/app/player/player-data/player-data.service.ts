@@ -41,7 +41,7 @@ export class PlayerDataService {
         this.player.lifeSkills[skill].id +
         " leveled up to " +
         this.player.lifeSkills[skill].level + ".");
-      if (skill == 2) {
+      if (skill == 0) {
         this.player.unallocatedStats += 3;
       }
     }

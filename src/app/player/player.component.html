@@ -13,11 +13,13 @@
     <div class="skill-div">
         <span class="skill-title">Life Skills</span>
         <span *ngFor="let skill of getPlayer().lifeSkills">
-            <span class="skill-text">{{skill.id}}</span>
-            <span class="skill-value">{{skill.level}}</span>
-            <progress class="exp-bar"
-                value="{{skill.exp}}"
-                max="{{skill.expToLevel}}"></progress>
+            <div *ngIf="isSkillActivated(skill)">
+                <span class="skill-text">{{skill.id}}</span>
+                <span class="skill-value">{{skill.level}}</span>
+                <progress class="exp-bar"
+                    value="{{skill.exp}}"
+                    max="{{skill.expToLevel}}"></progress>
+            </div>
         </span>
     </div>
     <div class="stat-div">
