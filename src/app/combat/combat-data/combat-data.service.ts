@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Enemy } from 'src/app/dungeon/dungeon-data/dungeon-data';
 import { DungeonDataService } from 'src/app/dungeon/dungeon-data/dungeon-data.service';
+import { InventoryDataService } from 'src/app/inventory/inventory-data/inventory-data.service';
 import { LogWindowDataService } from 'src/app/log-window/log-window-data/log-window-data.service';
 import { Resource, Stat } from 'src/app/player/player-data/player-data';
 import { PlayerDataService } from 'src/app/player/player-data/player-data.service';
@@ -70,7 +71,11 @@ export class CombatDataService {
     return false;
   }
 
-  combat(player: PlayerDataService, dungeon: DungeonDataService): void {
+  combat(
+    player: PlayerDataService,
+    dungeon: DungeonDataService,
+    inventory: InventoryDataService
+  ): void {
     var playerStats = player.getCombatStats();
     if (playerStats[2].level >= this.enemy.stats[2].level) {
       if (!this.playerAttack(player)) {
@@ -82,6 +87,7 @@ export class CombatDataService {
       else {
         this.resetHp();
         dungeon.setInCombat(false);
+        inventory.gainCurrency(0, 10);
       }
     }
     else {
@@ -89,6 +95,7 @@ export class CombatDataService {
         if (this.playerAttack(player)) {
           this.resetHp();
           dungeon.setInCombat(false);
+          inventory.gainCurrency(0, 10);
         }
       }
       else {

@@ -16,9 +16,23 @@ export class DungeonDataService {
     private playerData: PlayerDataService,
     private inventoryData: InventoryDataService,
     private combatData: CombatDataService,
-    private messageLog: LogWindowDataService) { 
-      this.dungeon = DUNGEON;
+    private messageLog: LogWindowDataService
+  ) { 
+    this.dungeon = DUNGEON;
+  }
+
+  loadDungeon(savedDungeon: Dungeon): void {
+    this.dungeon.name = savedDungeon.name;
+    this.dungeon.action = savedDungeon.action;
+    for (var i = 0; i < this.dungeon.actionList.length; i++) {
+      this.dungeon.actionList[i].name = savedDungeon.actionList[i].name;
+      this.dungeon.actionList[i].unlockedAt = savedDungeon.actionList[i].unlockedAt;
+      this.dungeon.actionList[i].active = savedDungeon.actionList[i].active;
+      this.dungeon.actionList[i].repeatable = savedDungeon.actionList[i].repeatable;
+      this.dungeon.actionList[i].progress = savedDungeon.actionList[i].progress;
+      this.dungeon.actionList[i].usedSkills = savedDungeon.actionList[i].usedSkills;
     }
+  }
 
   getDungeonData(): Dungeon {
     return this.dungeon;

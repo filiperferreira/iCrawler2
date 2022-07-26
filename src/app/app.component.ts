@@ -51,7 +51,7 @@ export class AppComponent {
 
     loader = localStorage.getItem('dungeon');
     if (loader) {
-      this.dungeonData.dungeon = JSON.parse(loader);
+      this.dungeonData.loadDungeon(JSON.parse(loader));
     }
 
     loader = localStorage.getItem('inventory');

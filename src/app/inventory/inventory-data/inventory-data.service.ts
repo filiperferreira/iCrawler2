@@ -24,6 +24,11 @@ export class InventoryDataService {
     return items;
   }
 
+  gainCurrency(currency: number, amount: number): void {
+    this.inventory.currencies[currency].amount += amount;
+    this.messageLog.addMessageToLog("You gained " + amount.toString() + " anima.");
+  }
+
   gainItem(item: number, amount: number): void {
     this.inventory.items[item].amount += amount;
     this.messageLog.addMessageToLog(

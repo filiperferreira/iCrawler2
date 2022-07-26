@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DungeonDataService } from '../dungeon/dungeon-data/dungeon-data.service';
+import { InventoryDataService } from '../inventory/inventory-data/inventory-data.service';
 import { Resource, Stat } from '../player/player-data/player-data';
 import { PlayerDataService } from '../player/player-data/player-data.service';
 import { CombatDataService } from './combat-data/combat-data.service';
@@ -13,7 +14,8 @@ export class CombatComponent implements OnInit {
   constructor(
     private combatData: CombatDataService,
     private dungeonData: DungeonDataService,
-    private playerData: PlayerDataService
+    private playerData: PlayerDataService,
+    private inventoryData: InventoryDataService
   ) { }
 
   ngOnInit(): void {}
@@ -29,7 +31,7 @@ export class CombatComponent implements OnInit {
   }
 
   attack(): void {
-    this.combatData.combat(this.playerData, this.dungeonData);
+    this.combatData.combat(this.playerData, this.dungeonData, this.inventoryData);
   }
 
   isInCombat(): boolean {
