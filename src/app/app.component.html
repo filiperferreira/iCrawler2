@@ -1,13 +1,21 @@
 <button (click)="saveGame()">Save</button>
 <button (click)="clearSave()">Reset</button>
 <div id="main">
-    <div [ngClass]="getBreakpoint()">
-        <app-player></app-player>
-        <app-dungeon></app-dungeon>
-        <app-combat></app-combat>
+    <div [ngClass]="getBreakpoint('outer')">
+        <div [ngClass]="getBreakpoint('inner')">
+            <app-player></app-player>
+        </div>
+        <div [ngClass]="getBreakpoint('inner')">
+            <app-dungeon></app-dungeon>
+            <app-combat></app-combat>
+        </div>
     </div>
-    <div [ngClass]="getBreakpoint()">
-        <app-inventory></app-inventory>
-        <app-log-window></app-log-window>
+    <div [ngClass]="getBreakpoint('outer')">
+        <div [ngClass]="getBreakpoint('inner')">
+            <app-inventory></app-inventory>
+        </div>
+        <div [ngClass]="getBreakpoint('inner')">
+            <app-log-window></app-log-window>
+        </div>
     </div>
 </div>

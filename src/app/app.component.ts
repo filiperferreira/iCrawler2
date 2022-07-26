@@ -85,17 +85,32 @@ export class AppComponent {
     }
   }
 
-  getBreakpoint(): String {
-    if (this.currentBreakpoint == Breakpoints.XLarge) {
-      return "large-column";
+  getBreakpoint(type: string): String {
+    if (type == "outer") {
+      if (this.currentBreakpoint == Breakpoints.XLarge) {
+        return "outer-small";
+      }
+      else if (this.currentBreakpoint == Breakpoints.Large
+        || this.currentBreakpoint == Breakpoints.Medium) {
+        return "outer-small";
+      }
+      else if (this.currentBreakpoint == Breakpoints.Small
+        || this.currentBreakpoint == Breakpoints.XSmall) {
+        return "outer-large";
+      }
     }
-    else if (this.currentBreakpoint == Breakpoints.Large
-      || this.currentBreakpoint == Breakpoints.Medium) {
-      return "medium-column";
-    }
-    else if (this.currentBreakpoint == Breakpoints.Small
-      || this.currentBreakpoint == Breakpoints.XSmall) {
-      return "small-column";
+    else {
+      if (this.currentBreakpoint == Breakpoints.XLarge) {
+        return "inner-small";
+      }
+      else if (this.currentBreakpoint == Breakpoints.Large
+        || this.currentBreakpoint == Breakpoints.Medium) {
+        return "inner-large";
+      }
+      else if (this.currentBreakpoint == Breakpoints.Small
+        || this.currentBreakpoint == Breakpoints.XSmall) {
+        return "inner-large";
+      }
     }
     return '';
   }
