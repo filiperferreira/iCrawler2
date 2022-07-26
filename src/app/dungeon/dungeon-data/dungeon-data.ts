@@ -131,6 +131,9 @@ export const DUNGEON: Dungeon = {
                 messageLog.addMessageToLog(
                     "He is now willing to teach you how to skin the forest animals for pelts."
                 )
+                dungeon.deactivateAction(3);
+                dungeon.activateAction(4);
+                dungeon.setActiveAction(undefined);
             }
         }
     },{
