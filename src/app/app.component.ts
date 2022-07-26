@@ -41,6 +41,7 @@ export class AppComponent {
 
   clearSave(): void {
     localStorage.clear();
+    location.reload();
   }
 
   loadGame(): void {
