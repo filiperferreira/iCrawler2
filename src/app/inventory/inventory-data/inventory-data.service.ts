@@ -12,6 +12,15 @@ export class InventoryDataService {
     this.inventory = INVENTORY;
   }
 
+  loadInventory(savedInventory: Inventory) {
+    for (var i = 0; i < savedInventory.currencies.length; i++) {
+      this.inventory.currencies[i].amount = savedInventory.currencies[i].amount;
+    }
+    for (var i = 0; i < savedInventory.items.length; i++) {
+      this.inventory.items[i].amount = savedInventory.items[i].amount;
+    }
+  }
+
   listItems() {
     var items: Item[] = [];
 

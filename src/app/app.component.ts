@@ -57,7 +57,7 @@ export class AppComponent {
 
     loader = localStorage.getItem('inventory');
     if (loader) {
-      this.inventoryData.inventory = JSON.parse(loader);
+      this.inventoryData.loadInventory(JSON.parse(loader));
     }
   }
 
