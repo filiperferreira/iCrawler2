@@ -78,6 +78,9 @@ export class DungeonDataService {
     return this.dungeon.encounterChance;
   }
 
+  activateAction(action: number): void {
+    this.dungeon.actionList[action].active = true;
+  }
   deactivateAction(action: number): void {
     this.dungeon.actionList[action].active = false;
   }

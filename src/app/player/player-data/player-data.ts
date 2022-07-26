@@ -26,7 +26,9 @@ export const PLAYER: Player = {
     lifeSkills: [
         {id: "Combat", level: 1, exp: 0, expToLevel: 100},
         {id: "Exploration", level: 1, exp: 0, expToLevel: 100},
-        {id: "Gathering", level: 1, exp: 0, expToLevel: 100}
+        {id: "Gathering", level: 1, exp: 0, expToLevel: 100},
+        {id: "Social", level: 1, exp: 0, expToLevel: 100},
+        {id: "Skinning", level: 1, exp: 0, expToLevel: 100}
     ],
     combatStats: [
         {id: "Attack", level: 5},

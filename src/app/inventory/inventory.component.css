@@ -11,11 +11,21 @@
     font-weight: bold;
 }
 
-#title {
+.title {
     font-size: x-large;
 }
 
+.subtitle {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+    font-size: medium;
+}
+
 #table {
+    margin-top: 5px;
+    border: 1px solid black;
     width: 100%;
 }
 

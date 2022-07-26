@@ -47,7 +47,7 @@ export class AppComponent {
   loadGame(): void {
     var loader = localStorage.getItem('player');
     if (loader) {
-      this.playerData.player = JSON.parse(loader);
+      this.playerData.loadPlayer(JSON.parse(loader));
     }
 
     loader = localStorage.getItem('dungeon');

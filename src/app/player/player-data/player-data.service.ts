@@ -13,6 +13,19 @@ export class PlayerDataService {
     this.player = PLAYER;
   }
 
+  loadPlayer(savedPlayer: Player) {
+    this.player.name = savedPlayer.name;
+    this.player.health = savedPlayer.health;
+    this.player.mana = savedPlayer.mana;
+    for (var i = 0; i < savedPlayer.lifeSkills.length; i++) {
+      this.player.lifeSkills[i] = savedPlayer.lifeSkills[i];
+    }
+    for (var i = 0; i < savedPlayer.combatStats.length; i++) {
+      this.player.combatStats[i] = savedPlayer.combatStats[i];
+    }
+    this.player.unallocatedStats = savedPlayer.unallocatedStats;
+  }
+
   getPlayerData(): Player {
     return this.player;
   }
@@ -36,7 +49,7 @@ export class PlayerDataService {
     while (this.player.lifeSkills[skill].exp >= this.player.lifeSkills[skill].expToLevel) {
       this.player.lifeSkills[skill].exp -= this.player.lifeSkills[skill].expToLevel;
       this.player.lifeSkills[skill].level += 1;
-      this.player.lifeSkills[skill].expToLevel = Math.pow(this.player.lifeSkills[skill].expToLevel, 1.1);
+      this.player.lifeSkills[skill].expToLevel = Math.pow(this.player.lifeSkills[skill].expToLevel, 1.05);
       this.messageLog.addMessageToLog(
         this.player.lifeSkills[skill].id +
         " leveled up to " +
