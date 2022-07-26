@@ -71,12 +71,9 @@
 }
 
 .skill-div {
-    box-sizing: border-box;
-    padding: 5px;
     float: left;
     text-align: center;
     width: 70%;
-    border: 1px solid black;
 }
 
 .skill-title {
@@ -117,12 +114,9 @@
 }
 
 .stat-div {
-    box-sizing: border-box;
-    padding: 5px;
     float: right;
     text-align: center;
     width: 29%;
-    border: 1px solid black;
 }
 
 .stat-title {

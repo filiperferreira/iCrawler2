@@ -98,4 +98,9 @@ export class AppComponent {
     }
     return '';
   }
+
+  seconds: number = 5;
+  action = setInterval(() => {
+    this.saveGame();
+  }, this.seconds * 1000);
 }
