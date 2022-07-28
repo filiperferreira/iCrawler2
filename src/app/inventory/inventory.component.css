@@ -1,20 +1,3 @@
-#inventory {
-    margin: 5px;
-    padding: 5px;
-    border: 5px double black;
-}
-
-#inventory-title {
-    width: 100%;
-    text-align: center;
-    display: inline-block;
-    font-weight: bold;
-}
-
-.title {
-    font-size: x-large;
-}
-
 .subtitle {
     width: 100%;
     text-align: center;

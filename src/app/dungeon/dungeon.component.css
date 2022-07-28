@@ -1,24 +1,3 @@
-#dungeon {
-    margin: 5px;
-    padding: 5px;
-    border: 5px double black;
-}
-
-#dungeon-title {
-    width: 100%;
-    text-align: center;
-    display: inline-block;
-    font-weight: bold;
-}
-
-#title {
-    font-size: medium;
-}
-
-#dungeon-name {
-    font-size: x-large;
-}
-
 .action-progress-label {
     text-align: center;
     display: inline-block;

@@ -8,12 +8,15 @@ import { PlayerDataService } from './player-data/player-data.service';
   styleUrls: ['./player.component.css']
 })
 export class PlayerComponent implements OnInit {
-  @Output() initEvent = new EventEmitter<string>();
+  @Output() initEvent = new EventEmitter<string[]>();
+
+  subtitle: string = "Player Info";
+  title: string = "Crawler";
 
   constructor(private playerData: PlayerDataService) { }
 
   ngOnInit(): void {
-    this.initEvent.emit(this.getPlayer().name);
+    this.initEvent.emit([this.subtitle, this.title]);
   }
 
   getPlayer(): Player {

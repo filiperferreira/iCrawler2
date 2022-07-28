@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DungeonDataService } from '../dungeon/dungeon-data/dungeon-data.service';
 import { InventoryDataService } from '../inventory/inventory-data/inventory-data.service';
 import { Resource, Stat } from '../player/player-data/player-data';
@@ -12,6 +12,17 @@ import { CombatDataService } from './combat-data/combat-data.service';
 })
 export class CombatComponent implements OnInit {  
   @Input() autoAttack = false;
+  @Output() initEvent = new EventEmitter<string[]>();
+  @Output() displayEvent = new EventEmitter<boolean>();
+
+  display: boolean = false;
+  subtitle: string = "";
+  title: string = "Combat Window";
+
+  ngOnInit(): void {
+    this.initEvent.emit([this.subtitle, this.title]);
+    this.displayEvent.emit(this.display);
+  }
 
   constructor(
     private combatData: CombatDataService,
@@ -19,8 +30,6 @@ export class CombatComponent implements OnInit {
     private playerData: PlayerDataService,
     private inventoryData: InventoryDataService
   ) { }
-
-  ngOnInit(): void {}
 
   getEnemyName(): string {
     return this.combatData.getEnemyName();
@@ -42,12 +51,23 @@ export class CombatComponent implements OnInit {
   endCombat(): void {
     this.combatData.resetHp();
     this.dungeonData.setInCombat(false);
+    this.toggleDisplay();
+  }
+
+  toggleDisplay() {
+    this.display = !this.display;
+    this.displayEvent.emit(this.display);
   }
 
   seconds: number = 1;
   action = setInterval(() => {
-    if (this.isInCombat() && this.autoAttack) {
-      this.attack();
+    if (this.isInCombat()) {
+      if (!this.display) {
+        this.toggleDisplay();
+      }
+      if (this.autoAttack) {
+        this.attack();
+      }
     }
   }, this.seconds * 1000);
 }

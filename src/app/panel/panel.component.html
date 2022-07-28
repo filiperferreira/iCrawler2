@@ -1,8 +1,33 @@
-<div id="panel">
+<div id="panel" [hidden]="!display">
     <div id="header">
-        <span id="subtitle">Subtitle</span><br>
-        <span id="title">Title</span>
+        <span id="subtitle" *ngIf="subtitle != ''">{{subtitle}}<br></span>
+        <span id="title">{{title}}</span>
     </div>
     <hr>
-    <app-player *ngIf="componentName == 'player'"></app-player>
+    <app-player
+        *ngIf="componentName == 'player'"
+        (initEvent)="updateHeader($event)">
+    </app-player>
+    <app-dungeon
+        *ngIf="componentName == 'dungeon'"
+        (initEvent)="updateHeader($event)"
+        (displayEvent)="toggleDisplay($event)">
+    </app-dungeon>
+    <app-combat
+        *ngIf="componentName == 'combat'"
+        (initEvent)="updateHeader($event)"
+        (displayEvent)="toggleDisplay($event)">
+    </app-combat>
+    <app-upgrade
+        *ngIf="componentName == 'upgrade'"
+        (initEvent)="updateHeader($event)">
+    </app-upgrade>
+    <app-inventory
+        *ngIf="componentName == 'inventory'"
+        (initEvent)="updateHeader($event)">
+    </app-inventory>
+    <app-log-window
+        *ngIf="componentName == 'messageLog'"
+        (initEvent)="updateHeader($event)">
+    </app-log-window>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-panel',
@@ -8,9 +8,22 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PanelComponent implements OnInit {
   @Input() componentName: string = "";
 
-  constructor() { }
+  display: boolean = true;
+  subtitle: string = "";
+  title: string = "";
 
-  ngOnInit(): void {
+  constructor(private cd: ChangeDetectorRef) { }
+
+  ngOnInit(): void {}
+
+  updateHeader(header: string[]) {
+    this.subtitle = header[0];
+    this.title = header[1];
+    this.cd.detectChanges();
   }
 
+  toggleDisplay(display: boolean) {
+    console.log(display);
+    this.display = display;
+  }
 }

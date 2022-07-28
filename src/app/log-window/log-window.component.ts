@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LogWindowDataService } from './log-window-data/log-window-data.service';
 
 @Component({
@@ -7,11 +7,16 @@ import { LogWindowDataService } from './log-window-data/log-window-data.service'
   styleUrls: ['./log-window.component.css']
 })
 export class LogWindowComponent implements OnInit {
+  @Output() initEvent = new EventEmitter<string[]>();
 
-  constructor(private logData: LogWindowDataService) { }
+  subtitle: string = "";
+  title: string = "Log Window";
 
   ngOnInit(): void {
+    this.initEvent.emit([this.subtitle, this.title]);
   }
+
+  constructor(private logData: LogWindowDataService) { }
 
   getMessageLog(): string[] {
     return this.logData.messageLog;

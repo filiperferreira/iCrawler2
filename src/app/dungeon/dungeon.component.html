@@ -1,9 +1,4 @@
-<div id="dungeon" *ngIf="!isInCombat()">
-    <div id="dungeon-title">
-        <span id="title">Current Area</span><br>
-        <span id="dungeon-name">{{getDungeon().name}}</span>
-    </div>
-    <hr>
+<div>
     <div *ngFor="let action of getUnlockedActions()">
         <span class="action-progress-label">{{action.progress.label}}</span>
         <progress class="action-progress-bar"

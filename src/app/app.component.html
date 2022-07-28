@@ -4,20 +4,19 @@
     <div [ngClass]="getBreakpoint('outer')">
         <div [ngClass]="getBreakpoint('inner')">
             <app-panel [componentName]="'player'"></app-panel>
-            <app-player></app-player>
-            <app-upgrade></app-upgrade>
+            <app-panel [componentName]="'upgrade'"></app-panel>
         </div>
         <div [ngClass]="getBreakpoint('inner')">
-            <app-dungeon></app-dungeon>
-            <app-combat></app-combat>
+            <app-panel [componentName]="'dungeon'"></app-panel>
+            <app-panel [componentName]="'combat'"></app-panel>
         </div>
     </div>
     <div [ngClass]="getBreakpoint('outer')">
         <div [ngClass]="getBreakpoint('inner')">
-            <app-inventory></app-inventory>
+            <app-panel [componentName]="'inventory'"></app-panel>
         </div>
         <div [ngClass]="getBreakpoint('inner')">
-            <app-log-window></app-log-window>
+            <app-panel [componentName]="'messageLog'"></app-panel>
         </div>
     </div>
 </div>
