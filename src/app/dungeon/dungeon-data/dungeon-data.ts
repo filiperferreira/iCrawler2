@@ -144,7 +144,12 @@ export const DUNGEON: Dungeon = {
         skills: [{
             name: "Charge",
             action: function(playerStats, combatData) {
-                return combatData.calculateDamage(combatData.enemy.stats, playerStats);
+                var modStats = [
+                    {id: combatData.enemy.stats[0].id, level: combatData.enemy.stats[0].level},
+                    {id: combatData.enemy.stats[1].id, level: combatData.enemy.stats[1].level},
+                    {id: combatData.enemy.stats[2].id, level: combatData.enemy.stats[2].level * 2},
+                ]
+                return combatData.calculateDamage(modStats, playerStats);
             }
         }]
     }, {
@@ -158,7 +163,12 @@ export const DUNGEON: Dungeon = {
         skills: [{
             name: "Bite",
             action: function(playerStats, combatData) {
-                return combatData.calculateDamage(combatData.enemy.stats, playerStats);
+                var modStats = [
+                    {id: combatData.enemy.stats[0].id, level: combatData.enemy.stats[0].level * 2},
+                    {id: combatData.enemy.stats[1].id, level: combatData.enemy.stats[1].level},
+                    {id: combatData.enemy.stats[2].id, level: combatData.enemy.stats[2].level},
+                ]
+                return combatData.calculateDamage(modStats, playerStats);
             }
         }]
     }]
