@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Action, Dungeon, DUNGEON, Progress} from './dungeon-data';
+import { Action, Dungeon, DUNGEON, Progress, Enemy} from './dungeon-data';
 import { PlayerDataService } from 'src/app/player/player-data/player-data.service';
 import { InventoryDataService } from 'src/app/inventory/inventory-data/inventory-data.service';
 import { CombatDataService } from 'src/app/combat/combat-data/combat-data.service';
@@ -38,6 +38,15 @@ export class DungeonDataService {
 
   getActionProgress(action: number): Progress {
     return this.dungeon.actionList[action].progress;
+  }
+
+  getEnemyByName(enemyName: string): Enemy {
+    for (var enemy of this.dungeon.enemyList) {
+      if (enemy.name == enemyName) {
+        return enemy;
+      }
+    }
+    return this.dungeon.enemyList[0];
   }
 
   setActiveAction(action?: Action): void {

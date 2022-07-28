@@ -29,9 +29,14 @@ export class CombatDataService {
   }
 
   constructor(
-    private messageLog: LogWindowDataService
+    private messageLog: LogWindowDataService,
   ) { 
     this.enemy = this.placeholderEnemy;
+  }
+
+  loadCombat(savedEnemy: Enemy, dungeonData: DungeonDataService) {
+    var enemyName = savedEnemy.name;
+    this.enemy = dungeonData.getEnemyByName(enemyName);
   }
 
   setEnemy(enemy?: Enemy) {

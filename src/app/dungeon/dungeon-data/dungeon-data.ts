@@ -70,7 +70,6 @@ export const DUNGEON: Dungeon = {
                 }
                 if (dungeon.encounterRoll(dungeon.getEncounterChance())) {
                     dungeon.setInCombat(true);
-                    dungeon.setActiveAction(undefined);
                     messageLog.addMessageToLog("You were attacked by a " + combat.getEnemyName() + ".");
                 }
             }

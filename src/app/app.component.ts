@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { DungeonDataService } from './dungeon/dungeon-data/dungeon-data.service';
 import { PlayerDataService } from './player/player-data/player-data.service';
 import { InventoryDataService } from './inventory/inventory-data/inventory-data.service';
+import { CombatDataService } from './combat/combat-data/combat-data.service';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,8 @@ export class AppComponent {
     private breakpointObserver: BreakpointObserver,
     private playerData: PlayerDataService,
     private dungeonData: DungeonDataService,
-    private inventoryData: InventoryDataService
+    private inventoryData: InventoryDataService,
+    private combatData: CombatDataService
   ) { }
 
   ngOnInit(): void {
@@ -59,12 +61,23 @@ export class AppComponent {
     if (loader) {
       this.inventoryData.loadInventory(JSON.parse(loader));
     }
+
+    loader = localStorage.getItem('inCombat');
+    if (loader && JSON.parse(loader)) {
+      this.dungeonData.setInCombat(true);
+      var enemy = localStorage.getItem('combatEnemy');
+      if (enemy) {
+        this.combatData.loadCombat(JSON.parse(enemy), this.dungeonData);
+      }
+    }
   }
 
   saveGame(): void {
     localStorage.setItem('player', JSON.stringify(this.playerData.player));
     localStorage.setItem('dungeon', JSON.stringify(this.dungeonData.dungeon));
     localStorage.setItem('inventory', JSON.stringify(this.inventoryData.inventory));
+    localStorage.setItem('inCombat', JSON.stringify(this.dungeonData.inCombat));
+    localStorage.setItem('combatEnemy', JSON.stringify(this.combatData.enemy));
   }
 
   private breakpointChanged(): void {

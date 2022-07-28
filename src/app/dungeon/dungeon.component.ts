@@ -44,11 +44,13 @@ export class DungeonComponent implements OnInit {
 
   seconds: number = 1/60;
   action = setInterval(() => {
-    if (this.getDungeon().action != undefined) {
-      this.performAction(this.dungeonData.getActiveAction());
-    }
-    else if (!this.isInCombat()) {
-      this.playerData.restoreHP(1 * this.seconds);
+    if (!this.isInCombat()) {
+      if (this.getDungeon().action != undefined) {
+        this.performAction(this.dungeonData.getActiveAction());
+      }
+      else {
+        this.playerData.restoreHP(1 * this.seconds);
+      }
     }
   }, this.seconds * 1000);
 }
