@@ -128,30 +128,9 @@ export const DUNGEON: Dungeon = {
                 messageLog.addMessageToLog(
                     "Now that took a lot of effort, but the hermit has finally warmed up to you."
                 )
-                messageLog.addMessageToLog(
-                    "He is now willing to teach you how to skin the forest animals for pelts."
-                )
                 dungeon.deactivateAction(3);
-                dungeon.activateAction(4);
                 dungeon.setActiveAction(undefined);
             }
-        }
-    },{
-        name: "Learn Skinning",
-        unlockedAt: 20,
-        active: false,
-        repeatable: true,
-        progress: {label: "Learn Skinning", current: 0, max: 200},
-        usedSkills: [
-            {skill: 3, difficulty: 10, weight: 0.5},
-            {skill: 4, difficulty: 30, weight: 2}
-        ],
-        action: function(dungeon, player, inventory, combat, messageLog) {
-            var actionProgress = player.calculateProgress(this.usedSkills);
-            for (var usedSkill of this.usedSkills) {
-                player.gainExp(usedSkill.skill, usedSkill.difficulty, 1/60);
-            }
-            dungeon.progressAction(4, actionProgress/60);
         }
     }],
     encounterChance: 1,

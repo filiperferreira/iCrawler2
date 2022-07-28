@@ -8,6 +8,7 @@
         <div id="command-list">
             <button class="command-button" (click)="attack()">Attack</button><br>
             <button class="command-button" (click)="endCombat()">Flee</button>
+            <input type="checkbox" [(ngModel)]="autoAttack">Auto Attack
         </div>
     </div>
     <div id="enemy-stats">

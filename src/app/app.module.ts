@@ -10,6 +10,7 @@ import { MaterialModule } from './material/material.module';
 import { CombatComponent } from './combat/combat.component';
 import { LogWindowComponent } from './log-window/log-window.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
