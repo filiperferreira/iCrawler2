@@ -3,6 +3,7 @@
 <div id="main">
     <div [ngClass]="getBreakpoint('outer')">
         <div [ngClass]="getBreakpoint('inner')">
+            <app-panel [componentName]="'player'"></app-panel>
             <app-player></app-player>
             <app-upgrade></app-upgrade>
         </div>

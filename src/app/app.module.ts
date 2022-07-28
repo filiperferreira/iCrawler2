@@ -11,6 +11,7 @@ import { CombatComponent } from './combat/combat.component';
 import { LogWindowComponent } from './log-window/log-window.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 import { FormsModule } from '@angular/forms';
+import { PanelComponent } from './panel/panel.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     InventoryComponent,
     CombatComponent,
     LogWindowComponent,
-    UpgradeComponent
+    UpgradeComponent,
+    PanelComponent
   ],
   imports: [
     BrowserModule,
