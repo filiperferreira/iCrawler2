@@ -1,31 +1,39 @@
-<div id="panel" [hidden]="!display">
+<div id="panel">
     <div id="header">
-        <span id="subtitle" *ngIf="subtitle != ''">{{subtitle}}<br></span>
-        <span id="title">{{title}}</span>
+        <div id="panel-title">
+            <span id="subtitle" *ngIf="subtitle != ''">{{subtitle}}<br></span>
+            <span id="title">{{title}}</span>
+        </div>
+        <div id="hide-show">
+            <button (click)="display = false" class="clean-button" *ngIf="display">Hide</button>
+            <button (click)="display = true" class="clean-button" *ngIf="!display">Show</button>
+        </div>
     </div>
     <hr>
-    <app-player
-        *ngIf="componentName == 'player'"
-        (initEvent)="updateHeader($event)">
-    </app-player>
-    <app-dungeon
-        *ngIf="componentName == 'dungeon'"
-        (initEvent)="updateHeader($event)">
-    </app-dungeon>
-    <app-combat
-        *ngIf="componentName == 'combat'"
-        (initEvent)="updateHeader($event)">
-    </app-combat>
-    <app-upgrade
-        *ngIf="componentName == 'upgrade'"
-        (initEvent)="updateHeader($event)">
-    </app-upgrade>
-    <app-inventory
-        *ngIf="componentName == 'inventory'"
-        (initEvent)="updateHeader($event)">
-    </app-inventory>
-    <app-log-window
-        *ngIf="componentName == 'messageLog'"
-        (initEvent)="updateHeader($event)">
-    </app-log-window>
+    <div [hidden]="!display">
+        <app-player
+            *ngIf="componentName == 'player'"
+            (initEvent)="updateHeader($event)">
+        </app-player>
+        <app-dungeon
+            *ngIf="componentName == 'dungeon'"
+            (initEvent)="updateHeader($event)">
+        </app-dungeon>
+        <app-combat
+            *ngIf="componentName == 'combat'"
+            (initEvent)="updateHeader($event)">
+        </app-combat>
+        <app-upgrade
+            *ngIf="componentName == 'upgrade'"
+            (initEvent)="updateHeader($event)">
+        </app-upgrade>
+        <app-inventory
+            *ngIf="componentName == 'inventory'"
+            (initEvent)="updateHeader($event)">
+        </app-inventory>
+        <app-log-window
+            *ngIf="componentName == 'messageLog'"
+            (initEvent)="updateHeader($event)">
+        </app-log-window>
+    </div>
 </div>

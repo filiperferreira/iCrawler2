@@ -9,13 +9,28 @@
     width: 100%;
     text-align: center;
     display: inline-block;
-    font-weight: bold;
 }
 
 #subtitle {
     font-size: medium;
+    font-weight: bold;
 }
 
 #title {
     font-size: x-large;
+    font-weight: bold;
+}
+
+#panel-title {
+    float: left;
+}
+
+#hide-show {
+    font-size: small;
+    float: right;
+}
+
+.clean-button {
+    background-color: white;
+    border: 1px solid gray;
 }
