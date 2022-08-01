@@ -13,15 +13,12 @@ import { CombatDataService } from './combat-data/combat-data.service';
 export class CombatComponent implements OnInit {  
   @Input() autoAttack = false;
   @Output() initEvent = new EventEmitter<string[]>();
-  @Output() displayEvent = new EventEmitter<boolean>();
 
-  display: boolean = false;
   subtitle: string = "";
   title: string = "Combat Window";
 
   ngOnInit(): void {
     this.initEvent.emit([this.subtitle, this.title]);
-    this.displayEvent.emit(this.display);
   }
 
   constructor(
@@ -51,23 +48,12 @@ export class CombatComponent implements OnInit {
   endCombat(): void {
     this.combatData.resetHp();
     this.dungeonData.setInCombat(false);
-    this.toggleDisplay();
-  }
-
-  toggleDisplay() {
-    this.display = !this.display;
-    this.displayEvent.emit(this.display);
   }
 
   seconds: number = 1;
   action = setInterval(() => {
-    if (this.isInCombat()) {
-      if (!this.display) {
-        this.toggleDisplay();
-      }
-      if (this.autoAttack) {
-        this.attack();
-      }
+    if (this.isInCombat() && this.autoAttack) {
+      this.attack();
     }
   }, this.seconds * 1000);
 }

@@ -10,13 +10,11 @@
     </app-player>
     <app-dungeon
         *ngIf="componentName == 'dungeon'"
-        (initEvent)="updateHeader($event)"
-        (displayEvent)="toggleDisplay($event)">
+        (initEvent)="updateHeader($event)">
     </app-dungeon>
     <app-combat
         *ngIf="componentName == 'combat'"
-        (initEvent)="updateHeader($event)"
-        (displayEvent)="toggleDisplay($event)">
+        (initEvent)="updateHeader($event)">
     </app-combat>
     <app-upgrade
         *ngIf="componentName == 'upgrade'"

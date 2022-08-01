@@ -10,9 +10,7 @@ import { DungeonDataService } from './dungeon-data/dungeon-data.service';
 })
 export class DungeonComponent implements OnInit {
   @Output() initEvent = new EventEmitter<string[]>();
-  @Output() displayEvent = new EventEmitter<boolean>();
 
-  display: boolean = true;
   subtitle: string = "Current Area";
   title: string = this.getDungeon().name;
   
@@ -49,27 +47,14 @@ export class DungeonComponent implements OnInit {
     this.dungeonData.setActiveAction(action);
   }
 
-  toggleDisplay() {
-    this.display = !this.display;
-    this.displayEvent.emit(this.display);
-  }
-
   seconds: number = 1/60;
   action = setInterval(() => {
     if (!this.isInCombat()) {
-      if (!this.display) {
-        this.toggleDisplay();
-      }
       if (this.getDungeon().action != undefined) {
         this.dungeonData.getActiveAction();
       }
       else {
         this.playerData.restoreHP(1 * this.seconds);
-      }
-    }
-    else {
-      if (this.display) {
-        this.toggleDisplay();
       }
     }
   }, this.seconds * 1000);
