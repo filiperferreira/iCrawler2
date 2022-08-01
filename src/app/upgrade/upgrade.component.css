@@ -1,0 +1,38 @@
+#upgrade {
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#upgrade-details {
+    float: left;
+}
+
+#upgrade-actions {
+    float: right;
+}
+
+.upgrade-name {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.upgrade-value {
+    margin-right: 5px;
+    font-size: small;
+}
+
+.upgrade-description {
+    display: inline-block;
+    font-size: small;
+    font-style: italic;
+}
+
+.upgrade-button {
+    float: right;
+}
+
+.upgrade-cost {
+    float: right;
+    font-size: small;
+}

@@ -91,6 +91,7 @@ export class CombatDataService {
       }
       else {
         this.resetHp();
+        inventory.gainItem(0, 10);
         dungeon.setInCombat(false);
       }
     }
@@ -98,6 +99,7 @@ export class CombatDataService {
       if (!this.enemyAttack(player)) {
         if (this.playerAttack(player)) {
           this.resetHp();
+          inventory.gainItem(0, 10);
           dungeon.setInCombat(false);
         }
       }

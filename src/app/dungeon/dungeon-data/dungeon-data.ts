@@ -84,7 +84,7 @@ export const DUNGEON: Dungeon = {
         action: function(dungeon, player, inventory, combat, messageLog) {
             var actionProgress = player.calculateProgress(this.usedSkills);
             if (dungeon.progressAction(1, actionProgress/60)) {
-                inventory.gainItem(0, 1);
+                inventory.gainItem(1, 1);
             }
             for (var usedSkill of this.usedSkills) {
                 player.gainExp(usedSkill.skill, usedSkill.difficulty, 1/60);

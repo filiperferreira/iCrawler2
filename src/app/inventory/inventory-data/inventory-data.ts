@@ -5,7 +5,7 @@ export interface Item {
     name: string,
     description: string,
     amount: number,
-    action: (player: PlayerDataService, messageLog: LogWindowDataService) => void
+    action?: (player: PlayerDataService, messageLog: LogWindowDataService) => void
 }
 
 export interface Inventory {
@@ -14,6 +14,11 @@ export interface Inventory {
 
 export const INVENTORY: Inventory = {
     items: [{
+        name: "Anima",
+        description: "A piece of the life essence of the beings you have killed.",
+        amount: 0,
+        action: undefined
+    }, {
         name: "Green Herb",
         description: "Restores 25 HP",
         amount: 0,

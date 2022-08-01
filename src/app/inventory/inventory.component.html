@@ -13,7 +13,7 @@
                     <span class="item-description">{{item.description}}</span>
                 </td>
                 <td class="action-column">
-                    <button (click)="useItem(item)">Use</button>
+                    <button *ngIf="hasUse(item)" (click)="useItem(item)">Use</button>
                 </td>
             </tr>
         </table>

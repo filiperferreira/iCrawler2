@@ -29,9 +29,15 @@ export class InventoryComponent implements OnInit {
     return this.inventoryData.listItems();
   }
 
+  hasUse(item: Item) {
+    return item.action != undefined;
+  }
+
   useItem(item: Item): void {
-    this.messageLog.addMessageToLog("You consumed a " + item.name + ".");
-    item.action(this.playerData, this.messageLog);
-    this.inventoryData.removeItem(item, 1);
+    if (item.action != undefined) {
+      this.messageLog.addMessageToLog("You consumed a " + item.name + ".");
+      item.action(this.playerData, this.messageLog);
+      this.inventoryData.removeItem(item, 1);
+    }
   }
 }
