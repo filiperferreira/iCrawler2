@@ -7,7 +7,6 @@
 
 #header {
     width: 100%;
-    text-align: center;
     display: inline-block;
 }
 
@@ -23,6 +22,11 @@
 
 #panel-title {
     float: left;
+}
+
+#content {
+    border-top: 1px dashed gray;
+    padding-top: 5px;
 }
 
 #hide-show {

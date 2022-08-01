@@ -7,8 +7,6 @@
 }
 
 #table {
-    margin-top: 5px;
-    border: 1px solid black;
     width: 100%;
 }
 
@@ -18,7 +16,6 @@
 }
 
 .item-column {
-    text-align: center;
     width: 60%;
 }
 

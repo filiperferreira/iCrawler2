@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { InventoryDataService } from './inventory-data/inventory-data.service';
-import { Currency, Item } from './inventory-data/inventory-data';
+import { Item } from './inventory-data/inventory-data';
 import { PlayerDataService } from '../player/player-data/player-data.service';
 import { LogWindowDataService } from '../log-window/log-window-data/log-window-data.service';
 
@@ -27,9 +27,6 @@ export class InventoryComponent implements OnInit {
 
   listItems(): Item[] {
     return this.inventoryData.listItems();
-  }
-  listCurrencies(): Currency[] {
-    return this.inventoryData.listCurrencies();
   }
 
   useItem(item: Item): void {

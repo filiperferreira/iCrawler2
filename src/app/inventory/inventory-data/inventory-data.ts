@@ -8,21 +8,11 @@ export interface Item {
     action: (player: PlayerDataService, messageLog: LogWindowDataService) => void
 }
 
-export interface Currency {
-    name: string,
-    amount: number
-}
-
 export interface Inventory {
-    currencies: Currency[]
     items: Item[]
 }
 
 export const INVENTORY: Inventory = {
-    currencies: [{
-        name: "Anima",
-        amount: 0
-    }],
     items: [{
         name: "Green Herb",
         description: "Restores 25 HP",

@@ -92,7 +92,6 @@ export class CombatDataService {
       else {
         this.resetHp();
         dungeon.setInCombat(false);
-        inventory.gainCurrency(0, 10);
       }
     }
     else {
@@ -100,7 +99,6 @@ export class CombatDataService {
         if (this.playerAttack(player)) {
           this.resetHp();
           dungeon.setInCombat(false);
-          inventory.gainCurrency(0, 10);
         }
       }
       else {
@@ -117,6 +115,7 @@ export class CombatDataService {
 
     if (flightRoll <= 0.8 + (playerSpeed - enemySpeed)/50) {
       this.messageLog.addMessageToLog("You flee from the " + this.enemy.name + ".");
+      this.resetHp();
       dungeon.setInCombat(false);
     }
     else {

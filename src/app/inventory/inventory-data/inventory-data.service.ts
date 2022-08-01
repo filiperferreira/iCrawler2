@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LogWindowDataService } from 'src/app/log-window/log-window-data/log-window-data.service';
-import { Currency, Inventory, INVENTORY, Item } from './inventory-data';
+import { Inventory, INVENTORY, Item } from './inventory-data';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,6 @@ export class InventoryDataService {
   }
 
   loadInventory(savedInventory: Inventory): void {
-    for (var i = 0; i < savedInventory.currencies.length; i++) {
-      this.inventory.currencies[i].amount = savedInventory.currencies[i].amount;
-    }
     for (var i = 0; i < savedInventory.items.length; i++) {
       this.inventory.items[i].amount = savedInventory.items[i].amount;
     }
@@ -31,23 +28,6 @@ export class InventoryDataService {
     }
 
     return items;
-  }
-
-  listCurrencies(): Currency[] {
-    var currencies: Currency[] = [];
-
-    for (var currency of this.inventory.currencies) {
-      if (currency.amount > 0) {
-        currencies.push(currency);
-      }
-    }
-
-    return currencies;
-  }
-
-  gainCurrency(currency: number, amount: number): void {
-    this.inventory.currencies[currency].amount += amount;
-    this.messageLog.addMessageToLog("You gained " + amount.toString() + " anima.");
   }
 
   gainItem(item: number, amount: number): void {

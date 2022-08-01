@@ -5,13 +5,14 @@
             value="{{action.progress.current}}"
             max="{{action.progress.max}}"></progress>
     </div>
-    <hr>
-    <button class="action-button"
-        (click)="setAction(undefined)"
-        [disabled]="getDungeon().action == undefined || isInCombat()">Rest</button>
-    <button class="action-button"
-        *ngFor="let action of getUnlockedActions()"
-        (click)="setAction(action)"
-        [disabled]="getDungeon().action == action || isInCombat()">{{action.name}}</button>    
+    <div id="button-div">
+        <button class="action-button"
+            (click)="setAction(undefined)"
+            [disabled]="getDungeon().action == undefined || isInCombat()">Rest</button>
+        <button class="action-button"
+            *ngFor="let action of getUnlockedActions()"
+            (click)="setAction(action)"
+            [disabled]="getDungeon().action == action || isInCombat()">{{action.name}}</button>  
+    </div>  
 </div>
 <app-panel [componentName]="'combat'" [hidden]="!isInCombat()"></app-panel>

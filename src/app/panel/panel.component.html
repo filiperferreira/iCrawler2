@@ -9,8 +9,7 @@
             <button (click)="display = true" class="clean-button" *ngIf="!display">Show</button>
         </div>
     </div>
-    <hr>
-    <div [hidden]="!display">
+    <div id="content" [hidden]="!display">
         <app-player
             *ngIf="componentName == 'player'"
             (initEvent)="updateHeader($event)">
