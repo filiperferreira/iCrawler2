@@ -70,11 +70,6 @@ export class DungeonDataService {
       this.combatData.setEnemy(this.dungeon.enemyList[enemyRoll]);
     }
     else {
-      this.messageLog.addMessageToLog(
-        "Combat with " +
-        this.combatData.getEnemyName() +
-        " ended."
-      )
       this.combatData.setEnemy(undefined);
     }
     this.inCombat = value;

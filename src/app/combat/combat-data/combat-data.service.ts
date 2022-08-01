@@ -110,6 +110,24 @@ export class CombatDataService {
     }
   }
 
+  flee(player: PlayerDataService, dungeon: DungeonDataService): void {
+    var playerSpeed = player.getCombatStats()[2].level;
+    var enemySpeed = this.enemy.stats[2].level;
+    var flightRoll = Math.random();
+
+    if (flightRoll <= 0.8 + (playerSpeed - enemySpeed)/50) {
+      this.messageLog.addMessageToLog("You flee from the " + this.enemy.name + ".");
+      dungeon.setInCombat(false);
+    }
+    else {
+      this.messageLog.addMessageToLog("You fail to run away from the " + this.enemy.name + ".");
+      if (this.enemyAttack(player)) {
+        this.resetHp();
+        dungeon.setInCombat(false);
+      }
+    }
+  }
+
   calculateDamage(attacker: Stat[], defender: Stat[]): number {
       var damageDifferential = Math.random() * 0.4 + 0.9;
       var attackerDamage = attacker[0].level * damageDifferential;
