@@ -95,7 +95,7 @@ export const DUNGEON: Dungeon = {
         unlockedAt: 20,
         active: true,
         repeatable: false,
-        progress: {label: "Meet Hermit", current: 0, max: 30},
+        progress: {label: "Meet Hermit", current: 0, max: 100},
         usedSkills: [{skill: 3, difficulty: 5, weight: 1}],
         action: function(dungeon, player, inventory, combat, messageLog) {
             var actionProgress = player.calculateProgress(this.usedSkills);
@@ -131,8 +131,102 @@ export const DUNGEON: Dungeon = {
                 dungeon.setActiveAction(undefined);
             }
         }
+    },{
+        name: "Meet Adventurer",
+        unlockedAt: 30,
+        active: true,
+        repeatable: false,
+        progress: {label: "Meet Adventurer", current: 0, max: 50},
+        usedSkills: [{skill: 3, difficulty: 5, weight: 1}],
+        action: function(dungeon, player, inventory, combat, messageLog) {
+            var actionProgress = player.calculateProgress(this.usedSkills);
+            for (var usedSkill of this.usedSkills) {
+                player.gainExp(usedSkill.skill, usedSkill.difficulty, 1/60);
+            }
+            if (dungeon.progressAction(4, actionProgress/60)) {
+                messageLog.addMessageToLog(
+                    "The adventurer politely introduces himself to you."
+                )
+                dungeon.deactivateAction(4);
+                dungeon.activateAction(5);
+                dungeon.activateAction(6);
+                dungeon.activateAction(7);
+                dungeon.setActiveAction(undefined);
+            }
+        }
+    },{
+        name: "Question Adventurer",
+        unlockedAt: 30,
+        active: false,
+        repeatable: false,
+        progress: {label: "Question Adventurer", current: 0, max: 250},
+        usedSkills: [{skill: 3, difficulty: 10, weight: 1}],
+        action: function(dungeon, player, inventory, combat, messageLog) {
+            var actionProgress = player.calculateProgress(this.usedSkills);
+            for (var usedSkill of this.usedSkills) {
+                player.gainExp(usedSkill.skill, usedSkill.difficulty, 1/60);
+            }
+            if (dungeon.progressAction(5, actionProgress/60)) {
+                messageLog.addMessageToLog(
+                    "The adventurer tells you about a goblin village somewhere nearby, maybe you should check it out."
+                );
+                dungeon.deactivateAction(5);
+                dungeon.setActiveAction(undefined);
+            }
+        }
+    },{
+        name: "Get Exploration Tips From Adventurer",
+        unlockedAt: 30,
+        active: false,
+        repeatable: false,
+        progress: {label: "Exploration Tips", current: 0, max: 500},
+        usedSkills: [
+            {skill: 1, difficulty: 20, weight: 3},
+            {skill: 3, difficulty: 5, weight: 0.5}
+        ],
+        action: function(dungeon, player, inventory, combat, messageLog) {
+            var actionProgress = player.calculateProgress(this.usedSkills);
+            for (var usedSkill of this.usedSkills) {
+                player.gainExp(usedSkill.skill, usedSkill.difficulty, 1/60);
+            }
+            if (dungeon.progressAction(6, actionProgress/60)) {
+                messageLog.addMessageToLog(
+                    "The adventurer has taught you everything he knows."
+                );
+                dungeon.deactivateAction(6);
+                dungeon.setActiveAction(undefined);
+            }
+        }
+    },{
+        name: "Spar With Adventurer",
+        unlockedAt: 30,
+        active: false,
+        repeatable: false,
+        progress: {label: "Sparring", current: 0, max: 500},
+        usedSkills: [
+            {skill: 0, difficulty: 20, weight: 3}
+        ],
+        action: function(dungeon, player, inventory, combat, messageLog) {
+            var actionProgress = player.calculateProgress(this.usedSkills);
+            for (var usedSkill of this.usedSkills) {
+                player.gainExp(usedSkill.skill, usedSkill.difficulty, 1/60);
+            }
+            if (player.takeDamage(1)) {
+                messageLog.addMessageToLog(
+                    "The adventurer has defeated you, regain your strength before trying again."
+                )
+                dungeon.setActiveAction(undefined);
+            }
+            if (dungeon.progressAction(7, actionProgress/60)) {
+                messageLog.addMessageToLog(
+                    "You are finally able to defeat the adventurer in combat, he seems very impressed with your growth."
+                );
+                dungeon.deactivateAction(7);
+                dungeon.setActiveAction(undefined);
+            }
+        }
     }],
-    encounterChance: 1,
+    encounterChance: 10/60,
     enemyList: [{
         name: "Boar",
         health: {current: 25, min: 0, max: 25},

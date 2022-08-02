@@ -76,7 +76,7 @@ export class PlayerDataService {
     this.player.health.current -= value;
     if (this.player.health.current <= 0) {
       this.player.health.current = 0;
-      this.messageLog.addMessageToLog("You died.");
+      this.messageLog.addMessageToLog("You black out for a few moments.");
       return true;
     }
     return false;

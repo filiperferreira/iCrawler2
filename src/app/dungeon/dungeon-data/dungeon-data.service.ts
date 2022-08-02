@@ -124,7 +124,7 @@ export class DungeonDataService {
   }
 
   encounterRoll(chance: number): boolean {
-    var roll = Math.floor(Math.random() * 100) + 1;
+    var roll = Math.random() * 100;
     if (roll <= chance) {
       return true;
     }
