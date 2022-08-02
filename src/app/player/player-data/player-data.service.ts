@@ -1,6 +1,7 @@
 import { Injectable} from '@angular/core';
 import { Difficulty } from 'src/app/dungeon/dungeon-data/dungeon-data';
 import { LogWindowDataService } from 'src/app/log-window/log-window-data/log-window-data.service';
+import { UpgradeDataService } from 'src/app/upgrade/upgrade-data/upgrade-data.service';
 import { Player, PLAYER, Stat } from './player-data';
 
 @Injectable({
@@ -9,7 +10,10 @@ import { Player, PLAYER, Stat } from './player-data';
 export class PlayerDataService {
   player: Player
 
-  constructor(private messageLog: LogWindowDataService) { 
+  constructor(
+    private messageLog: LogWindowDataService,
+    private upgradeData: UpgradeDataService
+  ) { 
     this.player = PLAYER;
   }
 
@@ -44,12 +48,16 @@ export class PlayerDataService {
     this.player.unallocatedStats -= 1;
   }
 
-  gainExp(skill: number, difficulty: number, expRatio: number): void {   
-    this.player.lifeSkills[skill].exp += expRatio * difficulty;
+  upgradeMaxHP(multiplier: number): void {
+    this.player.health.max = 100 * multiplier;
+  }
+
+  gainExp(skill: number, difficulty: number, expRatio: number): void {
+    this.player.lifeSkills[skill].exp += expRatio * difficulty * this.upgradeData.getExpGainMultiplier();
     while (this.player.lifeSkills[skill].exp >= this.player.lifeSkills[skill].expToLevel) {
       this.player.lifeSkills[skill].exp -= this.player.lifeSkills[skill].expToLevel;
       this.player.lifeSkills[skill].level += 1;
-      this.player.lifeSkills[skill].expToLevel = Math.pow(this.player.lifeSkills[skill].expToLevel, 1.05);
+      this.player.lifeSkills[skill].expToLevel = Math.pow(this.player.lifeSkills[skill].expToLevel, 1.02);
       this.messageLog.addMessageToLog(
         this.player.lifeSkills[skill].id +
         " leveled up to " +

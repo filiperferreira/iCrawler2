@@ -4,8 +4,8 @@
         <span class="upgrade-description">{{upgrade.description}}</span>
     </div>
     <div id="upgrade-actions">
-        <span class="upgrade-value">Current: (x{{upgrade.value}})</span>
-        <button class="upgrade-button">Buy</button><br>
+        <span class="upgrade-value">Current: (x{{upgrade.value.toFixed(1)}})</span>
+        <button (click)="buyUpgrade(upgrade)" class="upgrade-button">Buy</button><br>
         <span class="upgrade-cost">Cost: {{upgrade.cost}} Anima</span>
     </div>
 </div>

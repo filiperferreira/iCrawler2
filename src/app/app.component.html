@@ -1,6 +1,6 @@
 <button (click)="saveGame()">Save</button>
 <button (click)="clearSave()">Reset</button>
-<div id="main">
+<div id="main" *ngIf="loaded">
     <div [ngClass]="getBreakpoint('outer')">
         <div [ngClass]="getBreakpoint('inner')">
             <app-panel [componentName]="'player'"></app-panel>
@@ -18,4 +18,7 @@
             <app-panel [componentName]="'messageLog'"></app-panel>
         </div>
     </div>
+</div>
+<div *ngIf="!loaded">
+    <app-panel></app-panel>
 </div>

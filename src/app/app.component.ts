@@ -4,6 +4,7 @@ import { DungeonDataService } from './dungeon/dungeon-data/dungeon-data.service'
 import { PlayerDataService } from './player/player-data/player-data.service';
 import { InventoryDataService } from './inventory/inventory-data/inventory-data.service';
 import { CombatDataService } from './combat/combat-data/combat-data.service';
+import { UpgradeDataService } from './upgrade/upgrade-data/upgrade-data.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { CombatDataService } from './combat/combat-data/combat-data.service';
 export class AppComponent {
   title = "iCrawler2";
 
+  loaded: boolean = false;
   currentBreakpoint: string = '';
 
   readonly breakpoint$ = this.breakpointObserver.observe([
@@ -28,13 +30,15 @@ export class AppComponent {
     private playerData: PlayerDataService,
     private dungeonData: DungeonDataService,
     private inventoryData: InventoryDataService,
-    private combatData: CombatDataService
+    private combatData: CombatDataService,
+    private upgradeData: UpgradeDataService
   ) { }
 
   ngOnInit(): void {
     this.breakpoint$.subscribe(() => this.breakpointChanged());
     if (localStorage.length != 0) {
       this.loadGame();
+      this.loaded = true;
     }
     else {
       console.log("hello");
@@ -70,6 +74,11 @@ export class AppComponent {
         this.combatData.loadCombat(JSON.parse(enemy), this.dungeonData);
       }
     }
+
+    loader = localStorage.getItem('upgrades');
+    if (loader) {
+      this.upgradeData.loadUpgrades(JSON.parse(loader));
+    }
   }
 
   saveGame(): void {
@@ -78,6 +87,7 @@ export class AppComponent {
     localStorage.setItem('inventory', JSON.stringify(this.inventoryData.inventory));
     localStorage.setItem('inCombat', JSON.stringify(this.dungeonData.inCombat));
     localStorage.setItem('combatEnemy', JSON.stringify(this.combatData.enemy));
+    localStorage.setItem('upgrades', JSON.stringify(this.upgradeData.upgrades));
   }
 
   private breakpointChanged(): void {
@@ -130,6 +140,8 @@ export class AppComponent {
 
   seconds: number = 5;
   action = setInterval(() => {
-    this.saveGame();
+    if (this.loaded) {
+      this.saveGame();
+    }
   }, this.seconds * 1000);
 }

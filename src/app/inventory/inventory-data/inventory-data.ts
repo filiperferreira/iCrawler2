@@ -15,7 +15,7 @@ export interface Inventory {
 export const INVENTORY: Inventory = {
     items: [{
         name: "Anima",
-        description: "A piece of the life essence of the beings you have killed.",
+        description: "A piece of the life essence of the beings you have killed",
         amount: 0,
         action: undefined
     }, {
