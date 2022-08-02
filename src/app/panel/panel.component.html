@@ -34,5 +34,10 @@
             *ngIf="componentName == 'messageLog'"
             (initEvent)="updateHeader($event)">
         </app-log-window>
+        <app-name-chooser
+            *ngIf="componentName == 'nameChooser'"
+            (initEvent)="updateHeader($event)"
+            (loadEvent)="nameChosen($event)">
+        </app-name-chooser>
     </div>
 </div>

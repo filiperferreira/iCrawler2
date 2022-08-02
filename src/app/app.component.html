@@ -20,5 +20,9 @@
     </div>
 </div>
 <div *ngIf="!loaded">
-    <app-panel></app-panel>
+    <div [ngClass]="getBreakpoint('outer')">
+        <div [ngClass]="getBreakpoint('inner')">
+            <app-panel [componentName]="'nameChooser'" (loadEvent)="nameChosen($event)"></app-panel>
+        </div>
+    </div>
 </div>

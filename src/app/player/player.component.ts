@@ -11,7 +11,7 @@ export class PlayerComponent implements OnInit {
   @Output() initEvent = new EventEmitter<string[]>();
 
   subtitle: string = "Player Info";
-  title: string = "Crawler";
+  title: string = this.getPlayer().name;
 
   constructor(private playerData: PlayerDataService) { }
 

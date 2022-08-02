@@ -81,6 +81,12 @@ export class AppComponent {
     }
   }
 
+  nameChosen(newName: string): void {
+    this.loaded = true;
+    this.playerData.setName(newName);
+    this.saveGame();
+  }
+
   saveGame(): void {
     localStorage.setItem('player', JSON.stringify(this.playerData.player));
     localStorage.setItem('dungeon', JSON.stringify(this.dungeonData.dungeon));

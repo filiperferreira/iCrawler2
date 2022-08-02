@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-panel',
@@ -7,6 +7,7 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 })
 export class PanelComponent implements OnInit {
   @Input() componentName: string = "";
+  @Output() loadEvent = new EventEmitter<string>();
 
   display: boolean = true;
   subtitle: string = "";
@@ -16,14 +17,18 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  updateHeader(header: string[]) {
+  updateHeader(header: string[]): void {
     this.subtitle = header[0];
     this.title = header[1];
     this.cd.detectChanges();
   }
 
-  toggleDisplay(display: boolean) {
+  toggleDisplay(display: boolean): void {
     console.log(display);
     this.display = display;
+  }
+
+  nameChosen(newName: string): void {
+    this.loadEvent.emit(newName);
   }
 }

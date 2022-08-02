@@ -37,6 +37,10 @@ export class PlayerDataService {
     return this.player.combatStats;
   }
 
+  setName(newName: string): void {
+    this.player.name = newName;
+  }
+
   hasUnallocatedStats(): boolean {
     if (this.player.unallocatedStats > 0) {
       return true;
