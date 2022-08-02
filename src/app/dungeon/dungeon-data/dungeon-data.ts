@@ -159,7 +159,7 @@ export const DUNGEON: Dungeon = {
         unlockedAt: 30,
         active: false,
         repeatable: false,
-        progress: {label: "Question Adventurer", current: 0, max: 250},
+        progress: {label: "Question Adventurer", current: 0, max: 100},
         usedSkills: [{skill: 3, difficulty: 10, weight: 1}],
         action: function(dungeon, player, inventory, combat, messageLog) {
             var actionProgress = player.calculateProgress(this.usedSkills);
@@ -179,7 +179,7 @@ export const DUNGEON: Dungeon = {
         unlockedAt: 30,
         active: false,
         repeatable: false,
-        progress: {label: "Exploration Tips", current: 0, max: 500},
+        progress: {label: "Exploration Tips", current: 0, max: 50},
         usedSkills: [
             {skill: 1, difficulty: 20, weight: 3},
             {skill: 3, difficulty: 5, weight: 0.5}
@@ -202,7 +202,7 @@ export const DUNGEON: Dungeon = {
         unlockedAt: 30,
         active: false,
         repeatable: false,
-        progress: {label: "Sparring", current: 0, max: 500},
+        progress: {label: "Sparring", current: 0, max: 50},
         usedSkills: [
             {skill: 0, difficulty: 20, weight: 3}
         ],

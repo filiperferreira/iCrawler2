@@ -33,7 +33,7 @@ export class InventoryDataService {
   gainItem(item: number, amount: number): void {
     this.inventory.items[item].amount += amount;
     this.messageLog.addMessageToLog(
-      "You obtained a " +
+      "You obtained " + amount + " " +
       this.inventory.items[item].name +
       "."
     );

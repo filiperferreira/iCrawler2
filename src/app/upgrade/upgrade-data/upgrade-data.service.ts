@@ -28,15 +28,15 @@ export class UpgradeDataService {
     if (inventory.inventory.items[0].amount >= upgrade.cost) {
       inventory.inventory.items[0].amount -= upgrade.cost;
       upgrade.cost = Math.round(Math.pow(upgrade.cost, 1.01));
-    }
-    switch (upgrade.name) {
-      case "EXP Gain":
-        upgrade.value += 0.1;
-        break;
-      case "Max HP":
-        upgrade.value += 0.5;
-        player.upgradeMaxHP(upgrade.value);
-        break;
+      switch (upgrade.name) {
+        case "EXP Gain":
+          upgrade.value += 0.1;
+          break;
+        case "Max HP":
+          upgrade.value += 0.5;
+          player.upgradeMaxHP(upgrade.value);
+          break;
+      }
     }
   }
 
